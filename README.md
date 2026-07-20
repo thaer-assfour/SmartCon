@@ -82,8 +82,25 @@ SmartCon/
 │   └── audit-notes.md                # Per-engagement working notes
 ├── examples/
 │   └── reentrancy-demo/              # Runnable worked example (Phase 3 + Phase 5)
-└── engagements/                      # Per-target work (git-ignored for privacy)
+├── engagements/                      # Per-target work (git-ignored for privacy)
+├── CLAUDE.md                         # Auto-loaded methodology guidance for Claude Code
+└── .claude/
+    ├── skills/smartcon/              # /smartcon skill — drives the full audit
+    ├── hooks/session-start.sh        # Prepares the toolchain on session start
+    └── settings.json                 # Registers the hook
 ```
+
+## Using with Claude Code
+
+SmartCon is a first-class Claude Code project:
+
+- **`CLAUDE.md`** is loaded automatically and makes Claude Code follow the six-phase
+  methodology and the checklist when auditing a contract.
+- **`/smartcon`** skill runs the whole audit on a target (and auto-triggers on requests
+  like "audit this contract" or "find bugs in this Solidity").
+- **SessionStart hook** installs Slither and the example's `solc-js`/EVM deps so
+  `tools/scan.sh` and the worked example run immediately. It takes effect for future
+  sessions once merged into the default branch.
 
 ---
 
