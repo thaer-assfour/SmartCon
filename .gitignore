@@ -1,0 +1,23 @@
+# Per-engagement work is private — never commit target source or findings.
+engagements/*
+!engagements/.gitkeep
+
+# Scan artifacts
+**/smartcon-scan/
+
+# Foundry
+out/
+cache/
+broadcast/
+lib/
+
+# Env / secrets
+.env
+*.key
+ETHERSCAN_API_KEY
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
