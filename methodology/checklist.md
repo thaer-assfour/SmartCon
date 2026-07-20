@@ -107,19 +107,54 @@ open lead, not a pass.
 - [ ] **Non-standard decimals** (e.g. USDC=6, WBTC=8) handled?
 - [ ] **Approval race** / double-spend on non-zero→non-zero approve?
 
-## 11. Front-running / MEV
+## 11. Front-running / MEV — [notes](../knowledge-base/vulnerabilities/front-running-mev.md)
 
 - [ ] Can a pending tx be sandwiched for profit at the user's expense?
 - [ ] Is there a commit-reveal or slippage guard where ordering matters?
 - [ ] Can an attacker front-run initialization, a first deposit, or a claim?
+- [ ] Are `minAmountOut` and `deadline` enforced on every swap path?
 
 ## 12. General Solidity Hygiene
 
 - [ ] Uninitialized storage pointers; `delete` on structs with mappings.
-- [ ] `block.timestamp` / `blockhash` used as randomness? (miner/validator-influenced)
-- [ ] Return values of low-level `call`/`send` checked?
 - [ ] Correct handling of `address(this).balance` vs. accounting variables.
 - [ ] Events emitted for every state change (for off-chain integrity)?
+- [ ] Deprecated constructs (`selfdestruct`, `tx.origin`, `block.difficulty`) reviewed?
+
+## 13. Weak Randomness — [notes](../knowledge-base/vulnerabilities/randomness.md)
+
+- [ ] Is `block.timestamp` / `blockhash` / `prevrandao` used as randomness for a
+      value-bearing outcome? (predictable + validator-influenced)
+- [ ] Can the caller precompute the result in the same tx and revert on a loss?
+- [ ] Is a verifiable source (Chainlink VRF) or a sound commit-reveal used instead?
+
+## 14. Governance — [notes](../knowledge-base/vulnerabilities/governance.md)
+
+- [ ] Is voting power snapshotted at a **past block**, not read from current balance?
+- [ ] Is there a **timelock** between a proposal passing and executing?
+- [ ] Can a flash loan / large holder reach quorum atomically?
+- [ ] What is `execute` allowed to call — treasury, upgrades, arbitrary targets?
+
+## 15. Bridges & Cross-Chain — [notes](../knowledge-base/vulnerabilities/bridges-cross-chain.md)
+
+- [ ] Is the cross-chain message verified against the correct validator set/threshold?
+- [ ] Is a unique nonce / message id consumed to prevent replay?
+- [ ] Is the message bound to source chain, destination, and exact payload?
+- [ ] Are bridge init/upgrade paths tightly guarded? (Nomad/Wormhole/Ronin class)
+
+## 16. Low-Level Calls & Return Data — [notes](../knowledge-base/vulnerabilities/low-level-calls.md)
+
+- [ ] Is the `bool` from every `call`/`send`/`delegatecall` checked?
+- [ ] Any `delegatecall` to an untrusted/user-controlled target?
+- [ ] Can a callee return-bomb the caller (unbounded returndata)?
+- [ ] Is a `call` to a possibly-codeless address treated as success? (phantom function)
+
+## 17. Input Validation & Uninitialized State — [notes](../knowledge-base/vulnerabilities/input-validation.md)
+
+- [ ] Zero-address checks on setters and transfers?
+- [ ] Zero-amount / dust edge cases handled without corrupting accounting?
+- [ ] Array-length equality checked in batch functions?
+- [ ] Every critical variable initialized before use; parameters range-checked?
 
 ---
 

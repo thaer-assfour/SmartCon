@@ -11,6 +11,9 @@ cache/
 broadcast/
 lib/
 
+# Node (example harness deps)
+node_modules/
+
 # Env / secrets
 .env
 *.key

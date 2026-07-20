@@ -1,0 +1,24 @@
+'solc --version' running
+'solc --standard-json --allow-paths /home/user/SmartCon/examples/reentrancy-demo' running
+INFO:Detectors:
+Detector: reentrancy-eth
+Reentrancy in VulnerableVault.withdraw() (contracts/Vault.sol#21-29):
+	External calls:
+	- (ok,None) = msg.sender.call{value: amount}() (contracts/Vault.sol#25)
+	State variables written after the call(s):
+	- balances[msg.sender] = 0 (contracts/Vault.sol#28)
+	VulnerableVault.balances (contracts/Vault.sol#12) can be used in cross function reentrancies:
+	- VulnerableVault.balances (contracts/Vault.sol#12)
+	- VulnerableVault.deposit() (contracts/Vault.sol#14-16)
+	- VulnerableVault.withdraw() (contracts/Vault.sol#21-29)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in VulnerableVault.withdraw() (contracts/Vault.sol#21-29):
+	- (ok,None) = msg.sender.call{value: amount}() (contracts/Vault.sol#25)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Detector: missing-inheritance
+VulnerableVault (contracts/Vault.sol#11-34) should inherit from IVault (contracts/Attacker.sol#4-7)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-inheritance
+INFO:Slither:contracts/ analyzed (3 contracts with 101 detectors), 3 result(s) found

@@ -52,7 +52,7 @@ SmartCon/
 │   ├── checklist.md                  # Full category-driven review checklist
 │   └── severity-classification.md    # How to rate impact (Immunefi-aligned)
 ├── knowledge-base/
-│   ├── vulnerabilities/              # One file per vulnerability class
+│   ├── vulnerabilities/              # One file per vulnerability class (16)
 │   │   ├── reentrancy.md
 │   │   ├── access-control.md
 │   │   ├── arithmetic-and-precision.md
@@ -62,7 +62,13 @@ SmartCon/
 │   │   ├── upgradeability.md
 │   │   ├── signatures.md
 │   │   ├── denial-of-service.md
-│   │   └── token-integration.md
+│   │   ├── token-integration.md
+│   │   ├── front-running-mev.md
+│   │   ├── randomness.md
+│   │   ├── governance.md
+│   │   ├── bridges-cross-chain.md
+│   │   ├── low-level-calls.md
+│   │   └── input-validation.md
 │   └── case-studies/
 │       └── TEMPLATE.md               # Structure for post-mortem write-ups
 ├── tools/
@@ -74,8 +80,20 @@ SmartCon/
 │   ├── poc/                          # Ready-to-run Foundry PoC scaffold
 │   ├── report.md                     # Vulnerability report template
 │   └── audit-notes.md                # Per-engagement working notes
+├── examples/
+│   └── reentrancy-demo/              # Runnable worked example (Phase 3 + Phase 5)
 └── engagements/                      # Per-target work (git-ignored for privacy)
 ```
+
+---
+
+## Worked example
+
+[`examples/reentrancy-demo/`](examples/reentrancy-demo/) is a runnable, end-to-end
+demonstration against a deliberately vulnerable vault. `./run.sh` performs **Phase 3**
+(Slither flags the reentrancy) and **Phase 5** (a real EVM executes the exploit and
+drains the vault — attacker stakes 1 ETH and walks away with 16). It needs no native
+`solc`: a bundled `solc-js` shim covers restricted networks.
 
 ---
 

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Portable 'solc' shim backed by solc-js. Put this directory first on PATH and run
+# slither with --solc-standard-json. See offline-solc/README.md.
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+for a in "$@"; do
+  if [ "$a" = "--version" ]; then
+    node -e "console.log('solc, the solidity compiler commandline interface'); \
+      console.log('Version: ' + require(require('path').resolve('$DIR','..','node_modules','solc')).version())"
+    exit 0
+  fi
+done
+exec node "$DIR/compile.cjs"
