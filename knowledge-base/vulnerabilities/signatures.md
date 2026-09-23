@@ -58,4 +58,4 @@ usedNonce[signer][nonce] = true;
 - Malleability-based double-processing of orders in early DEX/relayer designs.
 
 ## Checklist mapping
-[Checklist §8 — Signatures & Replay](../../methodology/checklist.md#8-signatures--replay--notes)
+[Checklist §8 — Signatures & Replay](../../methodology/checklist.md#8-signatures-proofs--replay)

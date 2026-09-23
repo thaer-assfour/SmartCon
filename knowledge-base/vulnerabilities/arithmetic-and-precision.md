@@ -53,4 +53,4 @@ uint256 normalized = amount * (10 ** (18 - token.decimals()));
 - Countless reward-distribution rounding leaks farmed over many small transactions.
 
 ## Checklist mapping
-[Checklist §3 — Arithmetic & Precision](../../methodology/checklist.md#3-arithmetic--precision--notes)
+[Checklist §3 — Arithmetic & Precision](../../methodology/checklist.md#3-arithmetic--precision)

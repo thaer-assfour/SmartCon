@@ -60,4 +60,4 @@ function withdraw() external nonReentrant {
 - **Read-only reentrancy** — multiple lending markets mispriced Curve LP collateral.
 
 ## Checklist mapping
-[Checklist §1 — Reentrancy](../../methodology/checklist.md#1-reentrancy--notes)
+[Checklist §1 — Reentrancy](../../methodology/checklist.md#1-reentrancy)

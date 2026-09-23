@@ -60,4 +60,4 @@ require(target.code.length > 0, "no contract");
 - Phantom-function bugs: `call` to an EOA/non-contract treated as a successful integration.
 
 ## Checklist mapping
-[Checklist §16 — Low-Level Calls & Return Data](../../methodology/checklist.md#16-low-level-calls--return-data--notes)
+[Checklist §16 — Low-Level Calls & Return Data](../../methodology/checklist.md#16-low-level-calls--return-data)

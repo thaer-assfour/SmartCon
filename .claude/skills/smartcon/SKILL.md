@@ -33,17 +33,26 @@ Work these in order. Reference files are in this repository.
    `solc-js` shim: `PATH="$PWD/.../offline-solc:$PATH" slither <target>
    --solc-standard-json` (see `examples/reentrancy-demo/offline-solc/`). Triage every
    signal: true positive / false positive / needs-check, mapped to a checklist item ID.
-4. **Manual deep review.** Copy `templates/coverage-matrix.md` into the engagement and
-   walk `methodology/checklist.md` against the attack surface: first the `SC-*` core
-   questions of all 17 categories, then the `SOL-*` extended items (imported from the
-   Cyfrin/Solodit checklist) of every category the protocol's shape makes relevant, and
-   Appendix A for the compiler/library versions in use. For each category open the
-   linked `knowledge-base/vulnerabilities/*.md`, and read the linked case studies in
-   `knowledge-base/case-studies/` to see what the question looked like in a real hack.
-   `methodology/checklist-reference.md` has the description, remediation and Solodit
-   references for every ID. Record an answer with evidence for every item in the matrix;
-   `?` is an open lead, not a pass. For each invariant from Phase 1, actively construct a
-   state that violates it. Log hypotheses with the item ID that produced them.
+4. **Manual deep review, run as six parallel hunters.** Copy
+   `templates/coverage-matrix.md` into the engagement. Then, instead of walking the
+   checklist alone, dispatch the six hunter briefs in `templates/hunters/` (see its
+   `README.md` for the recipe): **one `Agent` call per brief, all in a single message**,
+   `subagent_type: general-purpose`, read-only. Each prompt contains the same packet
+   (target path and commit, scope and known issues, the Phase 1 invariants and money
+   flow, the Phase 2 attack-surface table, the Phase 3 signals in that hunter's
+   categories, a time budget) plus the instruction to read its brief file and return
+   exactly the brief's four output sections (Hypotheses, Coverage, Not covered, Leads for
+   other hunters). Do not show hunters each other's output. When they return: merge
+   hypotheses by **root cause** (same missing check = one finding, keep the higher
+   confidence, list both entry points), rank by impact × confidence, re-dispatch each
+   "lead for other hunters" to the named cluster as a short follow-up, paste every
+   Coverage row into the coverage matrix, and answer yourself any `SC-*` core item no
+   hunter covered. `methodology/checklist-reference.md` has the description,
+   remediation and Solodit references for every ID, and the case studies in
+   `knowledge-base/case-studies/` show what each question looked like in a real hack.
+   If sub-agents are unavailable, walk the six briefs sequentially yourself; the output
+   contract and the merge step are the same. `?` is an open lead, not a pass; every
+   hypothesis carries the item ID that produced it.
 5. **Proof of concept.** For each credible hypothesis, prove it. Prefer a Foundry test
    (`templates/poc/`) against a fork; if Foundry is unavailable, compile with the `solc`
    npm package and execute on `@ethereumjs/vm` (pattern in
@@ -51,7 +60,7 @@ Work these in order. Reference files are in this repository.
    invariant broken).
 5b. **Verify (adversarial self-review).** Before writing anything up, try to demote every
    finding using `templates/verify.md`. Do this with a **fresh sub-agent** (Agent tool)
-   that did not find the bug: give it the draft finding, the PoC, the in-scope source and
+   that was not one of the Phase 4 hunters and did not find the bug: give it the draft finding, the PoC, the in-scope source and
    the program rules, and instruct it to fill the rubric and return a verdict of
    CONFIRMED, DOWNGRADED (with the new severity) or REJECTED, with evidence for each
    section (reachability, preconditions and actors, capital and cost, PoC quality, known
@@ -91,7 +100,9 @@ read it before building the PoC.
 ## Maintaining the checklist
 
 `methodology/checklist.md`, `checklist.json`, `checklist-reference.md`,
-`templates/coverage-matrix.md` and `knowledge-base/case-studies/README.md` are generated.
-Edit `methodology/checklist-map.json` (core questions, placement of upstream items) or add
-a case study, then run `python3 tools/build-checklist.py`; `--check` verifies everything
-is current and every case study cites valid categories and IDs.
+`templates/coverage-matrix.md`, `templates/hunters/*.md` and
+`knowledge-base/case-studies/README.md` are generated. Edit
+`methodology/checklist-map.json` (core questions, placement of upstream items, the
+`hunters` clustering) or add a case study, then run `python3 tools/build-checklist.py`;
+`--check` verifies everything is current, every case study cites valid categories and
+IDs, and every `checklist.md#` link in the repo points at an existing heading.

@@ -54,4 +54,4 @@ require(answeredInRound >= roundId, "incomplete round");
 - **Numerous** — unchecked stale Chainlink data during depeg/outage events.
 
 ## Checklist mapping
-[Checklist §4 — Oracle & Price Manipulation](../../methodology/checklist.md#4-oracle--price-manipulation--notes)
+[Checklist §4 — Oracle & Price Manipulation](../../methodology/checklist.md#4-oracle--price-manipulation)

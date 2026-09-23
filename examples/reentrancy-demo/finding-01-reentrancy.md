@@ -39,7 +39,7 @@ the original amount, so the `require(amount > 0)` check passes again and another
 is made. This repeats until the vault's ETH is exhausted.
 
 Class: [reentrancy](../../knowledge-base/vulnerabilities/reentrancy.md),
-[checklist §1](../../methodology/checklist.md#1-reentrancy--notes).
+[checklist §1](../../methodology/checklist.md#1-reentrancy).
 
 ## Exploit scenario (step by step)
 1. Honest users deposit (in the PoC: 15 ETH total).

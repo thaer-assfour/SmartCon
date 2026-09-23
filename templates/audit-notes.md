@@ -42,12 +42,25 @@ Ran `tools/scan.sh`. Triage:
 
 ## Phase 4 — Manual review (checklist coverage)
 Coverage lives in a copy of [`coverage-matrix.md`](coverage-matrix.md) next to this file
-(one answer with evidence per checklist item per contract). Log hypotheses here, each
-with the item ID that produced it:
+(one answer with evidence per checklist item per contract).
 
-| # | Hypothesis | Checklist item(s) | Invariant broken | Impact (rough) | How to prove | Status |
-|---|------------|-------------------|------------------|----------------|--------------|--------|
-| 1 |  |  |  |  |  | open |
+**Hunter runs** (one row per brief in [`hunters/`](hunters/README.md)):
+
+| Cluster | Run by (agent / person) | Hypotheses returned | Core items covered | Not covered | Leads handed on |
+|---------|-------------------------|--------------------:|-------------------:|-------------|-----------------|
+| callbacks-and-liveness |  |  |  |  |  |
+| accounting-and-math |  |  |  |  |  |
+| tokens-and-oracles |  |  |  |  |  |
+| privilege-and-upgrade |  |  |  |  |  |
+| economics-and-ordering |  |  |  |  |  |
+| boundaries-and-inputs |  |  |  |  |  |
+
+**Merged hypotheses** (deduplicated by root cause, ranked by impact × confidence), each
+with the item ID that produced it and the hunter(s) that raised it:
+
+| # | Hypothesis | Checklist item(s) | Raised by | Invariant broken | Impact (rough) | Confidence | How to prove | Status |
+|---|------------|-------------------|-----------|------------------|----------------|------------|--------------|--------|
+| 1 |  |  |  |  |  |  |  | open |
 
 ---
 

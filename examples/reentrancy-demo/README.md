@@ -17,7 +17,7 @@ deliberately vulnerable contract. It exercises two phases end to end:
 `receive()` hook until the vault is empty.
 
 Maps to [knowledge-base/vulnerabilities/reentrancy.md](../../knowledge-base/vulnerabilities/reentrancy.md)
-and [checklist §1](../../methodology/checklist.md#1-reentrancy--notes).
+and [checklist §1](../../methodology/checklist.md#1-reentrancy).
 
 ## Run it
 

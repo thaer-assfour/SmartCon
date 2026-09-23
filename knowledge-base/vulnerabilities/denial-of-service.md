@@ -56,4 +56,4 @@ function withdraw() external {
 - Numerous batch-airdrop and distribution contracts bricked by one malicious recipient.
 
 ## Checklist mapping
-[Checklist §9 — Denial of Service](../../methodology/checklist.md#9-denial-of-service--notes)
+[Checklist §9 — Denial of Service](../../methodology/checklist.md#9-denial-of-service)

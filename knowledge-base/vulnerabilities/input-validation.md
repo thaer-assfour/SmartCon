@@ -55,4 +55,4 @@ require(param <= MAX && param >= MIN, "out of range");
 - Uninitialized storage pointer bugs corrupting slot 0 in pre-0.5 code.
 
 ## Checklist mapping
-[Checklist §17 — Input Validation & Uninitialized State](../../methodology/checklist.md#17-input-validation--uninitialized-state--notes)
+[Checklist §17 — Input Validation & Uninitialized State](../../methodology/checklist.md#17-input-validation--uninitialized-state)

@@ -54,4 +54,4 @@ constructor() { _disableInitializers(); }
 - **Numerous rug-adjacent bugs** — missing `onlyOwner` on mint / withdraw / upgrade.
 
 ## Checklist mapping
-[Checklist §2 — Access Control](../../methodology/checklist.md#2-access-control--notes)
+[Checklist §2 — Access Control](../../methodology/checklist.md#2-access-control)

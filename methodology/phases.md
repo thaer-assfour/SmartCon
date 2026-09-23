@@ -96,15 +96,27 @@ where Critical findings come from.
 **Do:**
 
 - Copy [`templates/coverage-matrix.md`](../templates/coverage-matrix.md) into the
-  engagement and walk the [checklist](checklist.md) category by category against the
-  attack-surface map. Answer every `SC-*` core question for every in-scope contract,
-  then the `SOL-*` extended items (imported from the Cyfrin/Solodit checklist) for each
-  category the protocol's shape makes relevant, and Appendix A for the compiler and
-  library versions in use. Record the answer and its evidence in the matrix; a `?` is an
-  open lead. [`checklist-reference.md`](checklist-reference.md) carries the description,
+  engagement. Then split the review across the six **hunters** in
+  [`templates/hunters/`](../templates/hunters/README.md): each brief owns a cluster of
+  related checklist categories (callbacks and liveness; accounting and math; tokens and
+  oracles; privilege, upgrades, governance and signatures; atomic capital, ordering and
+  randomness; inputs, cross-chain boundaries and hygiene) and carries that cluster's
+  `SC-*` core and `SOL-*` extended items, notes and case studies. Give every hunter the
+  same packet (target, scope, Phase 1 invariants, Phase 2 attack surface, Phase 3
+  signals, time budget) and run them at the same time, as sub-agents or as teammates,
+  without letting them see each other's output. Working alone, walk the six briefs in
+  turn; the output contract is the same.
+- Every hunter answers every core item of its categories for every in-scope contract
+  with evidence, walks the extended items the protocol's shape makes relevant, and
+  Appendix A for the compiler and library versions in use. A `?` is an open lead.
+  [`checklist-reference.md`](checklist-reference.md) carries the description,
   remediation and Solodit references behind every ID, and the linked
   [case studies](../knowledge-base/case-studies/README.md) show what each question
   looked like in a real incident.
+- **Merge**: deduplicate hypotheses by root cause (one missing check, one finding),
+  rank by impact × confidence, send each "lead for other hunters" to the cluster it
+  names, paste every coverage row into the matrix, and close any core item nobody
+  answered yourself.
 - For each intended invariant from Phase 1, actively try to construct a state that
   violates it. Think like an attacker who controls the calldata, the ordering, and
   can supply malicious tokens/contracts.

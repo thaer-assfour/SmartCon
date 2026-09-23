@@ -53,4 +53,4 @@ require(block.timestamp >= proposal.eta, "timelocked");
 - Multiple DAOs with low quorum or no timelock exploited by large/borrowed positions.
 
 ## Checklist mapping
-[Checklist §14 — Governance](../../methodology/checklist.md#14-governance--notes)
+[Checklist §14 — Governance](../../methodology/checklist.md#14-governance)

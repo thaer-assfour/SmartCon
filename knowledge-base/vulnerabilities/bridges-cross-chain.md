@@ -56,4 +56,4 @@ function claim(bytes32 msgHash, Proof calldata p) external {
 - **BNB Bridge (2022, ~$586M)** — forged Merkle proof accepted by the verifier.
 
 ## Checklist mapping
-[Checklist §15 — Bridges & Cross-Chain](../../methodology/checklist.md#15-bridges--cross-chain--notes)
+[Checklist §15 — Bridges & Cross-Chain](../../methodology/checklist.md#15-bridges--cross-chain)

@@ -61,4 +61,4 @@ setting it to zero. Use `forceApprove` / approve-zero-then-set.
 - **ERC-777 reentrancy** — imBTC on Uniswap/Lendf.me (dForce, ~$25M).
 
 ## Checklist mapping
-[Checklist §10 — Token Integration Quirks](../../methodology/checklist.md#10-token-integration-quirks--notes)
+[Checklist §10 — Token Integration Quirks](../../methodology/checklist.md#10-token-integration-quirks)

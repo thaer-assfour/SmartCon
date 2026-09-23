@@ -62,4 +62,4 @@ uint256[50] private __gap;
 - Multiple UUPS "uninitialized implementation" disclosures across DeFi.
 
 ## Checklist mapping
-[Checklist §7 — Upgradeability & Proxies](../../methodology/checklist.md#7-upgradeability--proxies--notes)
+[Checklist §7 — Upgradeability & Proxies](../../methodology/checklist.md#7-upgradeability--proxies)

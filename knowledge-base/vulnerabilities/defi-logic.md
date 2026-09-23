@@ -61,4 +61,4 @@ function claim() external {
 - **Countless contest findings** — vault rounding, reward timing, liquidation edges.
 
 ## Checklist mapping
-[Checklist §6 — DeFi Business Logic](../../methodology/checklist.md#6-defi-business-logic--notes)
+[Checklist §6 — DeFi Business Logic](../../methodology/checklist.md#6-defi-business-logic)

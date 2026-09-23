@@ -53,4 +53,4 @@ capital barrier for the length of one transaction.
 - **PancakeBunny, Cream, Harvest** — flash-loan-amplified price/accounting attacks.
 
 ## Checklist mapping
-[Checklist §5 — Flash Loans & Atomic Composition](../../methodology/checklist.md#5-flash-loans--atomic-composition--notes)
+[Checklist §5 — Flash Loans & Atomic Composition](../../methodology/checklist.md#5-flash-loans--atomic-composition)

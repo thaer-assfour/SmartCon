@@ -19,6 +19,8 @@ Generated (never edit by hand):
                                                  case studies citing the item.
   templates/coverage-matrix.md                   Per-engagement coverage table (copy into engagements/).
   knowledge-base/case-studies/README.md          Index of case studies.
+  templates/hunters/<slug>.md, README.md         One self-contained brief per parallel Phase-4 hunter
+                                                 (its categories' items, notes, case studies, output contract).
 
 Usage:
   python3 tools/build-checklist.py            # regenerate everything
@@ -47,6 +49,7 @@ OUT_MD = "methodology/checklist.md"
 OUT_REF = "methodology/checklist-reference.md"
 OUT_COV = "templates/coverage-matrix.md"
 OUT_CS_INDEX = "knowledge-base/case-studies/README.md"
+OUT_HUNTERS_DIR = "templates/hunters"
 CS_DIR = "knowledge-base/case-studies"
 
 GENERATED_BANNER = (
@@ -250,11 +253,27 @@ def build_model() -> dict:
         for iid in cs["items"]:
             cited_by.setdefault(iid, []).append(cs)
 
+    hunters = []
+    seen: dict[str, str] = {}
+    for h in cfg.get("hunters", []):
+        for slug in h["categories"]:
+            if slug not in cats:
+                raise BuildError(f"hunter {h['slug']!r} references unknown category {slug!r}")
+            if slug in seen:
+                raise BuildError(f"category {slug!r} is assigned to two hunters: {seen[slug]!r} and {h['slug']!r}")
+            seen[slug] = h["slug"]
+        hunters.append(dict(h, category_objs=[cats[slug] for slug in h["categories"]]))
+    if hunters:
+        missing = [c for c in cats if c not in seen]
+        if missing:
+            raise BuildError(f"categories not assigned to any hunter: {missing}")
+
     return {
         "cfg": cfg,
         "upstream_meta": upstream_meta,
         "categories": [cats[c["slug"]] for c in cfg["categories"]],
         "appendices": [apps[a["slug"]] for a in cfg["appendices"]],
+        "hunters": hunters,
         "case_studies": case_studies,
         "cited_by": cited_by,
     }
@@ -498,6 +517,141 @@ def render_case_index_md(m: dict) -> str:
     return "\n".join(o)
 
 
+def hunter_path(h: dict) -> str:
+    return f"{OUT_HUNTERS_DIR}/{h['slug']}.md"
+
+
+def render_hunter_md(m: dict, h: dict) -> str:
+    me = hunter_path(h)
+    ref = rel_link(me, OUT_REF)
+    cats = h["category_objs"]
+    others = [x for x in m["hunters"] if x["slug"] != h["slug"]]
+    o: list[str] = []
+    o.append(f"# Hunter brief — {h['name']}\n")
+    o.append(GENERATED_BANNER)
+    o.append("## Role\n")
+    o.append(
+        f"You are one of {len(m['hunters'])} parallel reviewers in SmartCon **Phase 4 (manual deep review)**. "
+        f"You own {len(cats)} checklist categories: "
+        + ", ".join(f"**{c['number']}. {c['name']}**" for c in cats)
+        + ". The other hunters own the rest ("
+        + "; ".join(f"{x['name']}: " + ", ".join(str(c["number"]) for c in x["category_objs"]) for x in others)
+        + "); do not spend time on their categories except to hand them a lead. You read and reason; you do not "
+        "modify the target, you do not fix anything, and you never run an exploit against a live deployment.\n"
+    )
+    o.append(f"**Focus.** {h['focus']}\n")
+    o.append("**Start with.**\n")
+    for i, step in enumerate(h["start_with"], 1):
+        o.append(f"{i}. {step}")
+    o.append("")
+    o.append("## Inputs you receive from the orchestrator\n")
+    o.append(
+        "- **Target:** path to the in-scope source (plus commit or deployment addresses), the program's scope and its known-issues list.\n"
+        "- **Phase 1:** the intended invariants in plain language and the money-flow map.\n"
+        "- **Phase 2:** the attack-surface table (entry point, caller, effect, value moved, assumptions).\n"
+        "- **Phase 3:** the triaged scanner signals that fall into your categories.\n"
+        "- **Time budget** and the exact output contract below.\n"
+    )
+    o.append("## Method\n")
+    o.append(
+        "1. Read the knowledge-base notes for your categories (linked below) and skim their case studies: they show what each question looked like in a real incident.\n"
+        "2. For every in-scope contract, answer every **core** item below with evidence (`file:line`). An item you could not answer is `?`, never a silent skip.\n"
+        "3. Walk the **extended** items that the protocol's shape makes relevant; mark the rest `N.A.` with a one-word reason.\n"
+        "4. For each Phase 1 invariant that touches your categories, actively construct a state that violates it: you control calldata, ordering, the tokens and contracts you supply, and, for one block, unlimited capital.\n"
+        "5. Write every hypothesis as the attacker would execute it: who calls what, in which order, under which preconditions, and what they walk away with. Quantify roughly.\n"
+    )
+    o.append("## Your checklist items\n")
+    for c in cats:
+        o.append(f"### {c['number']}. {c['name']}\n")
+        bits = []
+        if c.get("kb"):
+            bits.append(f"Notes: [`{c['kb']}`]({rel_link(me, c['kb'])})")
+        if c["case_studies"]:
+            bits.append("Case studies: " + ", ".join(f"[{cs_label(cs)}]({rel_link(me, cs['file'])})" for cs in c["case_studies"]))
+        if bits:
+            o.append(" · ".join(bits) + "\n")
+        o.append("**Core**\n")
+        for it in c["core"]:
+            o.append(f"- **[{it['id']}]({ref}#{anchor(it['id'])})** {it['question']}")
+        o.append("")
+        if c["extended"]:
+            o.append("**Extended (Cyfrin / Solodit)**\n")
+            for it in c["extended"]:
+                o.append(f"- **[{it['id']}]({ref}#{anchor(it['id'])})** {it['question']}")
+            o.append("")
+    if h.get("include_appendices"):
+        for a in m["appendices"]:
+            o.append(f"### Appendix {a['letter']}. {a['name']}\n")
+            o.append(a["description"] + "\n")
+            for it in a["extended"]:
+                o.append(f"- **[{it['id']}]({ref}#{anchor(it['id'])})** {it['question']}")
+            o.append("")
+    o.append("## Output contract\n")
+    o.append(
+        "Return exactly these four sections, in this order, as Markdown, with nothing before the first heading. "
+        "The orchestrator merges them mechanically.\n"
+    )
+    o.append("### Hypotheses\n")
+    o.append("| # | Hypothesis (attacker story, one or two sentences) | Checklist item(s) | Entry point (`Contract.function`, `file:line`) | Invariant broken | Preconditions | Rough impact | Confidence | How to prove (PoC sketch) |")
+    o.append("|---|---|---|---|---|---|---|---|---|")
+    o.append("")
+    o.append("Rank by impact × confidence (`high` / `medium` / `low`). No hypothesis without a `file:line`. A finding you could not fully confirm still goes here at `low` confidence; the orchestrator decides what reaches Phase 5.\n")
+    o.append("### Coverage\n")
+    o.append("| ID | Contract(s) | Answer (`Y` present → hypothesis above / `N` checked, absent / `?` open lead / `N.A.` not applicable) | Evidence (`file:line` or a one-line reason) |")
+    o.append("|---|---|---|---|")
+    o.append("")
+    o.append("One row per **core** item of your categories per in-scope contract (group contracts when the answer and evidence are identical), plus every extended item you examined.\n")
+    o.append("### Not covered\n")
+    o.append("What you did not get to and why (time, missing source, out of scope). An empty list means you claim full coverage of your categories.\n")
+    o.append("### Leads for other hunters\n")
+    o.append("Anything you noticed that belongs to another cluster: `<cluster slug>`: `<item ID>`: one line. Leave empty if none.\n")
+    return "\n".join(o)
+
+
+def render_hunters_readme(m: dict) -> str:
+    me = f"{OUT_HUNTERS_DIR}/README.md"
+    o: list[str] = []
+    o.append("# Phase 4 hunters\n")
+    o.append(GENERATED_BANNER)
+    o.append(
+        "Phase 4 is split across parallel **hunters**, one per cluster of related checklist categories. "
+        "Each brief in this directory is self-contained: role, focus, the cluster's core and extended items, "
+        "knowledge-base notes, case studies and the exact output contract. Hand a brief to a sub-agent "
+        "(or a teammate) together with the target and the Phase 1–3 artifacts, run all of them at once, then merge.\n"
+    )
+    o.append("| Cluster | Categories | Items (core + extended) | Brief |")
+    o.append("|---------|------------|------------------------:|-------|")
+    for h in m["hunters"]:
+        n_core = sum(len(c["core"]) for c in h["category_objs"])
+        n_ext = sum(len(c["extended"]) for c in h["category_objs"])
+        if h.get("include_appendices"):
+            n_ext += sum(len(a["extended"]) for a in m["appendices"])
+        cats = ", ".join(f"{c['number']}. {c['name']}" for c in h["category_objs"])
+        o.append(f"| **{h['name']}** | {cats} | {n_core} + {n_ext} | [`{h['slug']}.md`]({h['slug']}.md) |")
+    o.append("")
+    o.append("## Orchestration recipe\n")
+    o.append(
+        "1. **Prepare the shared packet** once: target path and commit, scope and known issues, Phase 1 invariants and money flow, "
+        "the Phase 2 attack-surface table, the Phase 3 triage, and a time budget. Every hunter gets the same packet plus its own brief.\n"
+        "2. **Spawn all hunters in parallel** (in Claude Code: one `Agent` call per brief in a single message, read-only instructions, "
+        "the brief's path and the packet in the prompt). Do not let a hunter see another hunter's output; independent eyes are the point.\n"
+        "3. **Merge** when they return. Deduplicate hypotheses by root cause, not by symptom: two stories that hinge on the same missing check are one finding, "
+        "kept at the higher confidence with both entry points listed. Rank by impact × confidence.\n"
+        "4. **Re-dispatch leads**: every line under \"Leads for other hunters\" goes to the named cluster as a short follow-up question; "
+        "a lead nobody owns goes to the orchestrator's own review.\n"
+        "5. **Assemble coverage**: paste every Coverage row into `engagements/<target>/coverage-matrix.md`. A core item with no row from any hunter is a gap: "
+        "answer it yourself or record it under \"Not covered\" in the audit notes. Never report coverage you did not get.\n"
+        "6. **Hand over to Phase 5** the ranked hypotheses with their checklist IDs; Phase 5b later verifies each PoC with a *fresh* agent that was not a hunter.\n"
+    )
+    o.append("## Regenerating the briefs\n")
+    o.append(
+        f"Briefs are generated from [`methodology/checklist-map.json`]({rel_link(me, MAP_PATH)}) (`hunters` block: cluster slug, name, "
+        "categories, focus, `start_with` steps, optional `include_appendices`) by `python3 tools/build-checklist.py`. "
+        "Change the clustering there, never in the briefs.\n"
+    )
+    return "\n".join(o)
+
+
 def build_json(m: dict) -> str:
     meta = m["upstream_meta"]
 
@@ -532,6 +686,12 @@ def build_json(m: dict) -> str:
              "items": [item_out(it) for it in a["extended"]]}
             for a in m["appendices"]
         ],
+        "hunters": [
+            {"slug": h["slug"], "name": h["name"], "categories": h["categories"], "focus": h["focus"],
+             "start_with": h["start_with"], "brief": hunter_path(h),
+             "item_ids": [it["id"] for c in h["category_objs"] for it in c["core"] + c["extended"]]}
+            for h in m["hunters"]
+        ],
         "case_studies": [cs_brief(cs) for cs in m["case_studies"]],
     }
     return json.dumps(out, indent=2, ensure_ascii=False) + "\n"
@@ -539,13 +699,39 @@ def build_json(m: dict) -> str:
 
 # --------------------------------------------------------------------------- main
 def outputs(m: dict) -> dict[str, str]:
-    return {
+    out = {
         OUT_JSON: build_json(m),
         OUT_MD: render_checklist_md(m),
         OUT_REF: render_reference_md(m),
         OUT_COV: render_coverage_md(m),
         OUT_CS_INDEX: render_case_index_md(m),
     }
+    if m["hunters"]:
+        for h in m["hunters"]:
+            out[hunter_path(h)] = render_hunter_md(m, h)
+        out[f"{OUT_HUNTERS_DIR}/README.md"] = render_hunters_readme(m)
+    return out
+
+
+def check_anchor_links(m: dict, checklist_md: str) -> list[str]:
+    """Every `checklist.md#anchor` link in the repo must point at a heading that exists."""
+    headings = {anchor(l.lstrip("#").strip()) for l in checklist_md.splitlines() if l.startswith("#")}
+    bad = []
+    skip_dirs = {".git", "node_modules", "engagements", "out", "cache", "lib"}
+    for dirpath, dirnames, filenames in os.walk(ROOT):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fn in filenames:
+            if not fn.endswith((".md", ".sol")):
+                continue
+            rel = os.path.relpath(os.path.join(dirpath, fn), ROOT)
+            if rel in (OUT_MD,):
+                continue
+            with open(os.path.join(dirpath, fn), encoding="utf-8", errors="replace") as fh:
+                text = fh.read()
+            for mth in re.finditer(r"checklist\.md#([A-Za-z0-9_-]+)", text):
+                if mth.group(1) not in headings:
+                    bad.append(f"{rel}: #{mth.group(1)}")
+    return bad
 
 
 def main(argv=None) -> int:
@@ -561,6 +747,11 @@ def main(argv=None) -> int:
         gen = outputs(m)
     except BuildError as exc:
         print(f"[build-checklist] ERROR: {exc}", file=sys.stderr)
+        return 1
+
+    bad_links = check_anchor_links(m, gen[OUT_MD])
+    if bad_links:
+        print("[build-checklist] ERROR: links to checklist.md anchors that do not exist:\n  " + "\n  ".join(bad_links), file=sys.stderr)
         return 1
 
     n_core = sum(len(c["core"]) for c in m["categories"])
@@ -584,6 +775,7 @@ def main(argv=None) -> int:
         return 0
 
     for rel, text in gen.items():
+        os.makedirs(os.path.dirname(rpath(rel)), exist_ok=True)
         with open(rpath(rel), "w", encoding="utf-8") as fh:
             fh.write(text)
         print(f"[build-checklist] wrote {rel}")

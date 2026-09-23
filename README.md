@@ -33,7 +33,7 @@ Six phases, each feeding the next. Full detail in [`methodology/phases.md`](meth
 | 1 | **Recon** | Understand the protocol: docs, architecture, money flow, TVL | Architecture map + contract inventory |
 | 2 | **Attack Surface Mapping** | Enumerate entry points, privileges, external calls, value flows | Attack-surface map |
 | 3 | **Automated Analysis** | Run static/dynamic tooling to catch known patterns | Triaged signal list |
-| 4 | **Manual Deep Review** | Hunt business-logic flaws, edge cases, broken invariants | Vulnerability hypotheses |
+| 4 | **Manual Deep Review** | Six parallel hunters, one per cluster of checklist categories, hunt business-logic flaws, edge cases, broken invariants | Ranked, deduplicated hypotheses + coverage matrix |
 | 5 | **Proof of Concept** | Prove exploitability with a Foundry test | Runnable PoC |
 | 5b | **Verify** | Try to demote every finding before writing it up: reachability, preconditions, capital, PoC quality, independent severity | Verification record per finding |
 | 6 | **Reporting** | Impact, exploit scenario, fix, severity | Submission-ready report |
@@ -57,9 +57,15 @@ item. [`templates/coverage-matrix.md`](templates/coverage-matrix.md) is the
 per-engagement record of which item was answered for which contract.
 
 The checklist is **generated**. Edit [`methodology/checklist-map.json`](methodology/checklist-map.json)
-(core questions, placement of upstream items) or add a case study, then run
-`python3 tools/build-checklist.py`; `--check` validates everything and `--fetch` refreshes
-the vendored upstream copy under [`methodology/upstream/`](methodology/upstream/).
+(core questions, placement of upstream items, the hunter clustering) or add a case study,
+then run `python3 tools/build-checklist.py`; `--check` validates everything (including every
+`checklist.md#` link in the repo) and `--fetch` refreshes the vendored upstream copy under
+[`methodology/upstream/`](methodology/upstream/).
+
+Phase 4 runs as **six parallel hunters** ([`templates/hunters/`](templates/hunters/README.md)):
+each brief owns a cluster of related categories and carries its items, notes, case studies
+and an exact output contract, so six sub-agents (or six people) can review the same target
+at once and the orchestrator merges their hypotheses by root cause.
 
 ---
 
@@ -108,6 +114,7 @@ SmartCon/
 │   ├── poc/                          # Ready-to-run Foundry PoC scaffold
 │   ├── report.md                     # Vulnerability report template
 │   ├── verify.md                     # Phase 5b rubric: try to demote your own finding
+│   ├── hunters/                      # GENERATED: six self-contained Phase 4 hunter briefs + recipe
 │   ├── coverage-matrix.md            # GENERATED: per-engagement checklist coverage record
 │   └── audit-notes.md                # Per-engagement working notes
 ├── examples/
@@ -127,9 +134,10 @@ SmartCon is a first-class Claude Code project:
 - **`CLAUDE.md`** is loaded automatically and makes Claude Code follow the six-phase
   methodology and the checklist when auditing a contract.
 - **`/smartcon`** skill runs the whole audit on a target (and auto-triggers on requests
-  like "audit this contract" or "find bugs in this Solidity"). In Phase 5b it hands each
-  finding to a fresh sub-agent with [`templates/verify.md`](templates/verify.md), whose
-  only job is to demote it.
+  like "audit this contract" or "find bugs in this Solidity"). In Phase 4 it dispatches
+  the six [hunter briefs](templates/hunters/README.md) as parallel sub-agents and merges
+  their hypotheses by root cause; in Phase 5b it hands each finding to a fresh sub-agent
+  with [`templates/verify.md`](templates/verify.md), whose only job is to demote it.
 - **SessionStart hook** installs Slither and the example's `solc-js`/EVM deps so
   `tools/scan.sh` and the worked example run immediately. It takes effect for future
   sessions once merged into the default branch.

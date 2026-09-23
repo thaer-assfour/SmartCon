@@ -9,11 +9,26 @@
       "name": "Reentrancy",
       "kb": "knowledge-base/vulnerabilities/reentrancy.md",
       "items": [
-        {"id": "SC-REEN-1", "question": "Does any function make an external call (token transfer, `call`, callback) *before* updating state? (Checks-Effects-Interactions violation)"},
-        {"id": "SC-REEN-2", "question": "Are there cross-function reentrancy paths that share state but not a guard?"},
-        {"id": "SC-REEN-3", "question": "Is there **read-only reentrancy**: a view function returning stale state that other protocols trust mid-callback?"},
-        {"id": "SC-REEN-4", "question": "Do ERC-777 / ERC-721 / ERC-1155 hooks or `receive()`/`fallback()` give the attacker a callback window?"},
-        {"id": "SC-REEN-5", "question": "Is `nonReentrant` applied consistently across *all* functions touching the same state, including cross-contract entry points?"}
+        {
+          "id": "SC-REEN-1",
+          "question": "Does any function make an external call (token transfer, `call`, callback) *before* updating state? (Checks-Effects-Interactions violation)"
+        },
+        {
+          "id": "SC-REEN-2",
+          "question": "Are there cross-function reentrancy paths that share state but not a guard?"
+        },
+        {
+          "id": "SC-REEN-3",
+          "question": "Is there **read-only reentrancy**: a view function returning stale state that other protocols trust mid-callback?"
+        },
+        {
+          "id": "SC-REEN-4",
+          "question": "Do ERC-777 / ERC-721 / ERC-1155 hooks or `receive()`/`fallback()` give the attacker a callback window?"
+        },
+        {
+          "id": "SC-REEN-5",
+          "question": "Is `nonReentrant` applied consistently across *all* functions touching the same state, including cross-contract entry points?"
+        }
       ]
     },
     {
@@ -23,12 +38,30 @@
       "name": "Access Control",
       "kb": "knowledge-base/vulnerabilities/access-control.md",
       "items": [
-        {"id": "SC-AC-1", "question": "Is every state-changing/privileged function gated by the correct modifier?"},
-        {"id": "SC-AC-2", "question": "Any function that *should* be `onlyOwner`/role-gated but is public?"},
-        {"id": "SC-AC-3", "question": "Is `tx.origin` used for authorization? (phishable; should be `msg.sender`)"},
-        {"id": "SC-AC-4", "question": "Are initializers protected against being called twice / by anyone?"},
-        {"id": "SC-AC-5", "question": "Are role admins set correctly? Can a role escalate itself?"},
-        {"id": "SC-AC-6", "question": "Is there a default-admin or emergency backdoor that concentrates too much power?"}
+        {
+          "id": "SC-AC-1",
+          "question": "Is every state-changing/privileged function gated by the correct modifier?"
+        },
+        {
+          "id": "SC-AC-2",
+          "question": "Any function that *should* be `onlyOwner`/role-gated but is public?"
+        },
+        {
+          "id": "SC-AC-3",
+          "question": "Is `tx.origin` used for authorization? (phishable; should be `msg.sender`)"
+        },
+        {
+          "id": "SC-AC-4",
+          "question": "Are initializers protected against being called twice / by anyone?"
+        },
+        {
+          "id": "SC-AC-5",
+          "question": "Are role admins set correctly? Can a role escalate itself?"
+        },
+        {
+          "id": "SC-AC-6",
+          "question": "Is there a default-admin or emergency backdoor that concentrates too much power?"
+        }
       ]
     },
     {
@@ -38,13 +71,35 @@
       "name": "Arithmetic & Precision",
       "kb": "knowledge-base/vulnerabilities/arithmetic-and-precision.md",
       "items": [
-        {"id": "SC-MATH-1", "question": "Any `unchecked` blocks where overflow/underflow is actually reachable?"},
-        {"id": "SC-MATH-2", "question": "Does division happen before multiplication, losing precision?"},
-        {"id": "SC-MATH-3", "question": "What direction does rounding go, and who profits? Can it be repeated to drain?"},
-        {"id": "SC-MATH-4", "question": "First-depositor / share-inflation: can a tiny first deposit + donation make shares mis-price for later depositors? (ERC-4626 classic)"},
-        {"id": "SC-MATH-5", "question": "Are decimals normalized across tokens of different precision?"},
-        {"id": "SC-MATH-6", "question": "Any casts (`uint256`→`uint128`, signed↔unsigned) that silently truncate?"},
-        {"id": "SC-MATH-7", "question": "Empty-market / zero-supply edge: what do exchange rates and rounding do when `totalSupply` is 0 or a few wei (Compound v2 `redeemUnderlying` rounding, first `mint` after a full redeem)?", "added_from": "case study 2023-04-15 Hundred Finance"}
+        {
+          "id": "SC-MATH-1",
+          "question": "Any `unchecked` blocks where overflow/underflow is actually reachable?"
+        },
+        {
+          "id": "SC-MATH-2",
+          "question": "Does division happen before multiplication, losing precision?"
+        },
+        {
+          "id": "SC-MATH-3",
+          "question": "What direction does rounding go, and who profits? Can it be repeated to drain?"
+        },
+        {
+          "id": "SC-MATH-4",
+          "question": "First-depositor / share-inflation: can a tiny first deposit + donation make shares mis-price for later depositors? (ERC-4626 classic)"
+        },
+        {
+          "id": "SC-MATH-5",
+          "question": "Are decimals normalized across tokens of different precision?"
+        },
+        {
+          "id": "SC-MATH-6",
+          "question": "Any casts (`uint256`→`uint128`, signed↔unsigned) that silently truncate?"
+        },
+        {
+          "id": "SC-MATH-7",
+          "question": "Empty-market / zero-supply edge: what do exchange rates and rounding do when `totalSupply` is 0 or a few wei (Compound v2 `redeemUnderlying` rounding, first `mint` after a full redeem)?",
+          "added_from": "case study 2023-04-15 Hundred Finance"
+        }
       ]
     },
     {
@@ -54,12 +109,31 @@
       "name": "Oracle & Price Manipulation",
       "kb": "knowledge-base/vulnerabilities/oracle-and-price-manipulation.md",
       "items": [
-        {"id": "SC-ORACLE-1", "question": "Does pricing use a **spot price** from an AMM reserve/`getReserves`/`balanceOf`? (manipulable in one tx via flash loan)"},
-        {"id": "SC-ORACLE-2", "question": "For Chainlink: are `updatedAt` staleness and `answeredInRound` checked? Is a zero/negative price handled? Are min/max bounds considered?"},
-        {"id": "SC-ORACLE-3", "question": "Is a TWAP used, and is its window long enough to resist manipulation?"},
-        {"id": "SC-ORACLE-4", "question": "Does the protocol trust `token.balanceOf(pair)` for accounting? (donation-manipulable)"},
-        {"id": "SC-ORACLE-5", "question": "What happens if the oracle reverts or returns stale data: fail open or closed?"},
-        {"id": "SC-ORACLE-6", "question": "Is a price or exchange rate derived from a pool or vault that a flash loan can inflate in the same transaction (LP-token pricing, `get_virtual_price`, `pricePerShare`, a cToken `exchangeRate` on a near-empty market)?", "added_from": "case studies PancakeBunny, Cream, Harvest, dForce"}
+        {
+          "id": "SC-ORACLE-1",
+          "question": "Does pricing use a **spot price** from an AMM reserve/`getReserves`/`balanceOf`? (manipulable in one tx via flash loan)"
+        },
+        {
+          "id": "SC-ORACLE-2",
+          "question": "For Chainlink: are `updatedAt` staleness and `answeredInRound` checked? Is a zero/negative price handled? Are min/max bounds considered?"
+        },
+        {
+          "id": "SC-ORACLE-3",
+          "question": "Is a TWAP used, and is its window long enough to resist manipulation?"
+        },
+        {
+          "id": "SC-ORACLE-4",
+          "question": "Does the protocol trust `token.balanceOf(pair)` for accounting? (donation-manipulable)"
+        },
+        {
+          "id": "SC-ORACLE-5",
+          "question": "What happens if the oracle reverts or returns stale data: fail open or closed?"
+        },
+        {
+          "id": "SC-ORACLE-6",
+          "question": "Is a price or exchange rate derived from a pool or vault that a flash loan can inflate in the same transaction (LP-token pricing, `get_virtual_price`, `pricePerShare`, a cToken `exchangeRate` on a near-empty market)?",
+          "added_from": "case studies PancakeBunny, Cream, Harvest, dForce"
+        }
       ]
     },
     {
@@ -69,9 +143,18 @@
       "name": "Flash Loans & Atomic Composition",
       "kb": "knowledge-base/vulnerabilities/flash-loans.md",
       "items": [
-        {"id": "SC-FLASH-1", "question": "Can any invariant be broken *within a single transaction* using borrowed capital?"},
-        {"id": "SC-FLASH-2", "question": "Are governance votes / share prices / collateral ratios read at a point an attacker can inflate atomically?"},
-        {"id": "SC-FLASH-3", "question": "Does the protocol assume \"an attacker can't have $100M\"? (they can, for one block)"}
+        {
+          "id": "SC-FLASH-1",
+          "question": "Can any invariant be broken *within a single transaction* using borrowed capital?"
+        },
+        {
+          "id": "SC-FLASH-2",
+          "question": "Are governance votes / share prices / collateral ratios read at a point an attacker can inflate atomically?"
+        },
+        {
+          "id": "SC-FLASH-3",
+          "question": "Does the protocol assume \"an attacker can't have $100M\"? (they can, for one block)"
+        }
       ]
     },
     {
@@ -81,13 +164,35 @@
       "name": "DeFi Business Logic",
       "kb": "knowledge-base/vulnerabilities/defi-logic.md",
       "items": [
-        {"id": "SC-DEFI-1", "question": "Lending: are collateral factor, health factor, and liquidation math correct at the boundaries? Can a position be made unliquidatable, or self-liquidated for profit?"},
-        {"id": "SC-DEFI-2", "question": "AMM: are the swap invariant (`x*y=k`), fees, and reserves updated atomically and in the right order?"},
-        {"id": "SC-DEFI-3", "question": "Staking/rewards: can rewards be double-claimed, claimed after unstake, or diluted/inflated via deposit timing?"},
-        {"id": "SC-DEFI-4", "question": "Vaults (ERC-4626): does `deposit`/`mint`/`withdraw`/`redeem` round in the protocol's favor? Is the first-deposit inflation attack mitigated?"},
-        {"id": "SC-DEFI-5", "question": "Fee logic: can fees be bypassed, set to values that break accounting, or round to zero?"},
-        {"id": "SC-DEFI-6", "question": "Slippage / deadline: are user-supplied `minOut` and `deadline` enforced?"},
-        {"id": "SC-DEFI-7", "question": "Do \"emergency\", \"donate\", \"migrate\" or \"rescue\" style functions re-run the same solvency / health / accounting checks as the normal path? (Euler `donateToReserves`, Platypus `emergencyWithdraw`)", "added_from": "case studies Euler, Platypus"}
+        {
+          "id": "SC-DEFI-1",
+          "question": "Lending: are collateral factor, health factor, and liquidation math correct at the boundaries? Can a position be made unliquidatable, or self-liquidated for profit?"
+        },
+        {
+          "id": "SC-DEFI-2",
+          "question": "AMM: are the swap invariant (`x*y=k`), fees, and reserves updated atomically and in the right order?"
+        },
+        {
+          "id": "SC-DEFI-3",
+          "question": "Staking/rewards: can rewards be double-claimed, claimed after unstake, or diluted/inflated via deposit timing?"
+        },
+        {
+          "id": "SC-DEFI-4",
+          "question": "Vaults (ERC-4626): does `deposit`/`mint`/`withdraw`/`redeem` round in the protocol's favor? Is the first-deposit inflation attack mitigated?"
+        },
+        {
+          "id": "SC-DEFI-5",
+          "question": "Fee logic: can fees be bypassed, set to values that break accounting, or round to zero?"
+        },
+        {
+          "id": "SC-DEFI-6",
+          "question": "Slippage / deadline: are user-supplied `minOut` and `deadline` enforced?"
+        },
+        {
+          "id": "SC-DEFI-7",
+          "question": "Do \"emergency\", \"donate\", \"migrate\" or \"rescue\" style functions re-run the same solvency / health / accounting checks as the normal path? (Euler `donateToReserves`, Platypus `emergencyWithdraw`)",
+          "added_from": "case studies Euler, Platypus"
+        }
       ]
     },
     {
@@ -97,12 +202,31 @@
       "name": "Upgradeability & Proxies",
       "kb": "knowledge-base/vulnerabilities/upgradeability.md",
       "items": [
-        {"id": "SC-PROXY-1", "question": "Storage layout: does an upgrade risk a **storage collision** with the old layout?"},
-        {"id": "SC-PROXY-2", "question": "Is the implementation contract left **uninitialized** (attacker can init & self-destruct/`delegatecall`)?"},
-        {"id": "SC-PROXY-3", "question": "`delegatecall` to untrusted targets? Function-selector clashes between proxy and impl?"},
-        {"id": "SC-PROXY-4", "question": "Are `__gap` slots reserved in upgradeable base contracts?"},
-        {"id": "SC-PROXY-5", "question": "Who can upgrade, and is that authority appropriately decentralized/timelocked?"},
-        {"id": "SC-PROXY-6", "question": "Does the proxy's own storage (admin, implementation, init flags) overlap the implementation's variables, so that `initialize` reads as never run and can be re-executed?", "added_from": "case study 2022-07-23 Audius"}
+        {
+          "id": "SC-PROXY-1",
+          "question": "Storage layout: does an upgrade risk a **storage collision** with the old layout?"
+        },
+        {
+          "id": "SC-PROXY-2",
+          "question": "Is the implementation contract left **uninitialized** (attacker can init & self-destruct/`delegatecall`)?"
+        },
+        {
+          "id": "SC-PROXY-3",
+          "question": "`delegatecall` to untrusted targets? Function-selector clashes between proxy and impl?"
+        },
+        {
+          "id": "SC-PROXY-4",
+          "question": "Are `__gap` slots reserved in upgradeable base contracts?"
+        },
+        {
+          "id": "SC-PROXY-5",
+          "question": "Who can upgrade, and is that authority appropriately decentralized/timelocked?"
+        },
+        {
+          "id": "SC-PROXY-6",
+          "question": "Does the proxy's own storage (admin, implementation, init flags) overlap the implementation's variables, so that `initialize` reads as never run and can be re-executed?",
+          "added_from": "case study 2022-07-23 Audius"
+        }
       ]
     },
     {
@@ -112,11 +236,26 @@
       "name": "Signatures, Proofs & Replay",
       "kb": "knowledge-base/vulnerabilities/signatures.md",
       "items": [
-        {"id": "SC-SIG-1", "question": "Is every signed message bound to a **nonce**, and is the nonce consumed?"},
-        {"id": "SC-SIG-2", "question": "Is the signature bound to `chainId` and the contract address (EIP-712 domain)?"},
-        {"id": "SC-SIG-3", "question": "Is `ecrecover` checked against `address(0)` (malleability / invalid sig)?"},
-        {"id": "SC-SIG-4", "question": "Can a signature be replayed across chains, forks, or contract instances?"},
-        {"id": "SC-SIG-5", "question": "Are `v/r/s` malleability and signature-uniqueness assumptions safe?"}
+        {
+          "id": "SC-SIG-1",
+          "question": "Is every signed message bound to a **nonce**, and is the nonce consumed?"
+        },
+        {
+          "id": "SC-SIG-2",
+          "question": "Is the signature bound to `chainId` and the contract address (EIP-712 domain)?"
+        },
+        {
+          "id": "SC-SIG-3",
+          "question": "Is `ecrecover` checked against `address(0)` (malleability / invalid sig)?"
+        },
+        {
+          "id": "SC-SIG-4",
+          "question": "Can a signature be replayed across chains, forks, or contract instances?"
+        },
+        {
+          "id": "SC-SIG-5",
+          "question": "Are `v/r/s` malleability and signature-uniqueness assumptions safe?"
+        }
       ]
     },
     {
@@ -126,11 +265,27 @@
       "name": "Denial of Service",
       "kb": "knowledge-base/vulnerabilities/denial-of-service.md",
       "items": [
-        {"id": "SC-DOS-1", "question": "Unbounded loops over user-growable arrays (can exceed block gas limit)?"},
-        {"id": "SC-DOS-2", "question": "Does a single failing external call (e.g. one recipient's transfer reverting) block a whole batch / the whole protocol? (push vs. pull payments)"},
-        {"id": "SC-DOS-3", "question": "Can an attacker grief by forcing gas costs, filling a queue, or locking funds?"},
-        {"id": "SC-DOS-4", "question": "Does the protocol handle a token that reverts on zero-value transfer?"},
-        {"id": "SC-DOS-5", "question": "Can a `require` in a refund / claim / settlement path be made permanently false (counter mismatch, one reverting recipient), locking every user's funds?", "added_from": "case study 2022-04-23 Akutar NFT"}
+        {
+          "id": "SC-DOS-1",
+          "question": "Unbounded loops over user-growable arrays (can exceed block gas limit)?"
+        },
+        {
+          "id": "SC-DOS-2",
+          "question": "Does a single failing external call (e.g. one recipient's transfer reverting) block a whole batch / the whole protocol? (push vs. pull payments)"
+        },
+        {
+          "id": "SC-DOS-3",
+          "question": "Can an attacker grief by forcing gas costs, filling a queue, or locking funds?"
+        },
+        {
+          "id": "SC-DOS-4",
+          "question": "Does the protocol handle a token that reverts on zero-value transfer?"
+        },
+        {
+          "id": "SC-DOS-5",
+          "question": "Can a `require` in a refund / claim / settlement path be made permanently false (counter mismatch, one reverting recipient), locking every user's funds?",
+          "added_from": "case study 2022-04-23 Akutar NFT"
+        }
       ]
     },
     {
@@ -140,13 +295,35 @@
       "name": "Token Integration Quirks",
       "kb": "knowledge-base/vulnerabilities/token-integration.md",
       "items": [
-        {"id": "SC-TOKEN-1", "question": "**Fee-on-transfer**: does the code assume received == sent amount?"},
-        {"id": "SC-TOKEN-2", "question": "**Rebasing tokens**: does cached balance drift from actual balance?"},
-        {"id": "SC-TOKEN-3", "question": "**Missing return value** ERC-20s (USDT): is `SafeERC20`/`safeTransfer` used?"},
-        {"id": "SC-TOKEN-4", "question": "**ERC-777 / hook tokens** (ERC-677 `transferAndCall`, ERC-1363) enabling reentrancy on transfer?"},
-        {"id": "SC-TOKEN-5", "question": "**Non-standard decimals** (e.g. USDC=6, WBTC=8) handled?"},
-        {"id": "SC-TOKEN-6", "question": "**Approval race** / double-spend on non-zero→non-zero approve?"},
-        {"id": "SC-TOKEN-7", "question": "**Phantom functions**: does the code call `permit` or other optional functions on tokens that may not implement them, where a `fallback` (WETH) or a codeless address makes the call \"succeed\"?", "added_from": "case study 2022-01-18 Multichain"}
+        {
+          "id": "SC-TOKEN-1",
+          "question": "**Fee-on-transfer**: does the code assume received == sent amount?"
+        },
+        {
+          "id": "SC-TOKEN-2",
+          "question": "**Rebasing tokens**: does cached balance drift from actual balance?"
+        },
+        {
+          "id": "SC-TOKEN-3",
+          "question": "**Missing return value** ERC-20s (USDT): is `SafeERC20`/`safeTransfer` used?"
+        },
+        {
+          "id": "SC-TOKEN-4",
+          "question": "**ERC-777 / hook tokens** (ERC-677 `transferAndCall`, ERC-1363) enabling reentrancy on transfer?"
+        },
+        {
+          "id": "SC-TOKEN-5",
+          "question": "**Non-standard decimals** (e.g. USDC=6, WBTC=8) handled?"
+        },
+        {
+          "id": "SC-TOKEN-6",
+          "question": "**Approval race** / double-spend on non-zero→non-zero approve?"
+        },
+        {
+          "id": "SC-TOKEN-7",
+          "question": "**Phantom functions**: does the code call `permit` or other optional functions on tokens that may not implement them, where a `fallback` (WETH) or a codeless address makes the call \"succeed\"?",
+          "added_from": "case study 2022-01-18 Multichain"
+        }
       ]
     },
     {
@@ -156,11 +333,27 @@
       "name": "Front-running / MEV",
       "kb": "knowledge-base/vulnerabilities/front-running-mev.md",
       "items": [
-        {"id": "SC-MEV-1", "question": "Can a pending tx be sandwiched for profit at the user's expense?"},
-        {"id": "SC-MEV-2", "question": "Is there a commit-reveal or slippage guard where ordering matters?"},
-        {"id": "SC-MEV-3", "question": "Can an attacker front-run initialization, a first deposit, or a claim?"},
-        {"id": "SC-MEV-4", "question": "Are `minAmountOut` and `deadline` enforced on every swap path?"},
-        {"id": "SC-MEV-5", "question": "Do protocol-owned or automated operations (rebalances, fee conversions, liquidity shifts, harvests) execute swaps without slippage or price-band bounds?", "added_from": "case study 2023-05-29 Jimbo's Protocol"}
+        {
+          "id": "SC-MEV-1",
+          "question": "Can a pending tx be sandwiched for profit at the user's expense?"
+        },
+        {
+          "id": "SC-MEV-2",
+          "question": "Is there a commit-reveal or slippage guard where ordering matters?"
+        },
+        {
+          "id": "SC-MEV-3",
+          "question": "Can an attacker front-run initialization, a first deposit, or a claim?"
+        },
+        {
+          "id": "SC-MEV-4",
+          "question": "Are `minAmountOut` and `deadline` enforced on every swap path?"
+        },
+        {
+          "id": "SC-MEV-5",
+          "question": "Do protocol-owned or automated operations (rebalances, fee conversions, liquidity shifts, harvests) execute swaps without slippage or price-band bounds?",
+          "added_from": "case study 2023-05-29 Jimbo's Protocol"
+        }
       ]
     },
     {
@@ -170,12 +363,32 @@
       "name": "General Solidity Hygiene",
       "kb": null,
       "items": [
-        {"id": "SC-HYG-1", "question": "Uninitialized storage pointers; `delete` on structs with mappings."},
-        {"id": "SC-HYG-2", "question": "Correct handling of `address(this).balance` vs. accounting variables."},
-        {"id": "SC-HYG-3", "question": "Events emitted for every state change (for off-chain integrity)?"},
-        {"id": "SC-HYG-4", "question": "Deprecated constructs (`selfdestruct`, `tx.origin`, `block.difficulty`) reviewed?"},
-        {"id": "SC-HYG-5", "question": "Have the compiler version and library versions (OpenZeppelin, Solmate) been checked against Appendix A (known compiler and library bugs)?", "added_from": "Cyfrin version-issue items"},
-        {"id": "SC-HYG-6", "question": "Forked or copied code: were constants, fee denominators and formulas diffed line by line against the upstream (Uniswap, Compound, OpenZeppelin) they came from?", "added_from": "case study 2021-04-28 Uranium Finance"}
+        {
+          "id": "SC-HYG-1",
+          "question": "Uninitialized storage pointers; `delete` on structs with mappings."
+        },
+        {
+          "id": "SC-HYG-2",
+          "question": "Correct handling of `address(this).balance` vs. accounting variables."
+        },
+        {
+          "id": "SC-HYG-3",
+          "question": "Events emitted for every state change (for off-chain integrity)?"
+        },
+        {
+          "id": "SC-HYG-4",
+          "question": "Deprecated constructs (`selfdestruct`, `tx.origin`, `block.difficulty`) reviewed?"
+        },
+        {
+          "id": "SC-HYG-5",
+          "question": "Have the compiler version and library versions (OpenZeppelin, Solmate) been checked against Appendix A (known compiler and library bugs)?",
+          "added_from": "Cyfrin version-issue items"
+        },
+        {
+          "id": "SC-HYG-6",
+          "question": "Forked or copied code: were constants, fee denominators and formulas diffed line by line against the upstream (Uniswap, Compound, OpenZeppelin) they came from?",
+          "added_from": "case study 2021-04-28 Uranium Finance"
+        }
       ]
     },
     {
@@ -185,9 +398,18 @@
       "name": "Weak Randomness",
       "kb": "knowledge-base/vulnerabilities/randomness.md",
       "items": [
-        {"id": "SC-RAND-1", "question": "Is `block.timestamp` / `blockhash` / `prevrandao` used as randomness for a value-bearing outcome? (predictable + validator-influenced)"},
-        {"id": "SC-RAND-2", "question": "Can the caller precompute the result in the same tx and revert on a loss?"},
-        {"id": "SC-RAND-3", "question": "Is a verifiable source (Chainlink VRF) or a sound commit-reveal used instead?"}
+        {
+          "id": "SC-RAND-1",
+          "question": "Is `block.timestamp` / `blockhash` / `prevrandao` used as randomness for a value-bearing outcome? (predictable + validator-influenced)"
+        },
+        {
+          "id": "SC-RAND-2",
+          "question": "Can the caller precompute the result in the same tx and revert on a loss?"
+        },
+        {
+          "id": "SC-RAND-3",
+          "question": "Is a verifiable source (Chainlink VRF) or a sound commit-reveal used instead?"
+        }
       ]
     },
     {
@@ -197,11 +419,27 @@
       "name": "Governance",
       "kb": "knowledge-base/vulnerabilities/governance.md",
       "items": [
-        {"id": "SC-GOV-1", "question": "Is voting power snapshotted at a **past block**, not read from current balance?"},
-        {"id": "SC-GOV-2", "question": "Is there a **timelock** between a proposal passing and executing?"},
-        {"id": "SC-GOV-3", "question": "Can a flash loan / large holder reach quorum atomically?"},
-        {"id": "SC-GOV-4", "question": "What is `execute` allowed to call: treasury, upgrades, arbitrary targets?"},
-        {"id": "SC-GOV-5", "question": "Can the code a proposal executes change between vote and execution (metamorphic contract via `CREATE2` + `selfdestruct`, upgradeable target, unpinned bytecode)?", "added_from": "Tornado Cash governance 2023-05-20"}
+        {
+          "id": "SC-GOV-1",
+          "question": "Is voting power snapshotted at a **past block**, not read from current balance?"
+        },
+        {
+          "id": "SC-GOV-2",
+          "question": "Is there a **timelock** between a proposal passing and executing?"
+        },
+        {
+          "id": "SC-GOV-3",
+          "question": "Can a flash loan / large holder reach quorum atomically?"
+        },
+        {
+          "id": "SC-GOV-4",
+          "question": "What is `execute` allowed to call: treasury, upgrades, arbitrary targets?"
+        },
+        {
+          "id": "SC-GOV-5",
+          "question": "Can the code a proposal executes change between vote and execution (metamorphic contract via `CREATE2` + `selfdestruct`, upgradeable target, unpinned bytecode)?",
+          "added_from": "Tornado Cash governance 2023-05-20"
+        }
       ]
     },
     {
@@ -211,12 +449,32 @@
       "name": "Bridges & Cross-Chain",
       "kb": "knowledge-base/vulnerabilities/bridges-cross-chain.md",
       "items": [
-        {"id": "SC-BRIDGE-1", "question": "Is the cross-chain message verified against the correct validator set/threshold?"},
-        {"id": "SC-BRIDGE-2", "question": "Is a unique nonce / message id consumed to prevent replay?"},
-        {"id": "SC-BRIDGE-3", "question": "Is the message bound to source chain, destination, and exact payload?"},
-        {"id": "SC-BRIDGE-4", "question": "Are bridge init/upgrade paths tightly guarded? (Nomad/Wormhole/Ronin class)"},
-        {"id": "SC-BRIDGE-5", "question": "Can a cross-chain message target a privileged contract of the bridge itself (config, keeper or validator-set contract) and pass its `onlyOwner` check because the executor is the owner?", "added_from": "case study 2021-08-10 Poly Network"},
-        {"id": "SC-BRIDGE-6", "question": "Is the zero/default value of a trusted-root, confirmation or nonce mapping treated as valid or \"confirmed\"?", "added_from": "case study 2022-08-01 Nomad"}
+        {
+          "id": "SC-BRIDGE-1",
+          "question": "Is the cross-chain message verified against the correct validator set/threshold?"
+        },
+        {
+          "id": "SC-BRIDGE-2",
+          "question": "Is a unique nonce / message id consumed to prevent replay?"
+        },
+        {
+          "id": "SC-BRIDGE-3",
+          "question": "Is the message bound to source chain, destination, and exact payload?"
+        },
+        {
+          "id": "SC-BRIDGE-4",
+          "question": "Are bridge init/upgrade paths tightly guarded? (Nomad/Wormhole/Ronin class)"
+        },
+        {
+          "id": "SC-BRIDGE-5",
+          "question": "Can a cross-chain message target a privileged contract of the bridge itself (config, keeper or validator-set contract) and pass its `onlyOwner` check because the executor is the owner?",
+          "added_from": "case study 2021-08-10 Poly Network"
+        },
+        {
+          "id": "SC-BRIDGE-6",
+          "question": "Is the zero/default value of a trusted-root, confirmation or nonce mapping treated as valid or \"confirmed\"?",
+          "added_from": "case study 2022-08-01 Nomad"
+        }
       ]
     },
     {
@@ -226,10 +484,22 @@
       "name": "Low-Level Calls & Return Data",
       "kb": "knowledge-base/vulnerabilities/low-level-calls.md",
       "items": [
-        {"id": "SC-LL-1", "question": "Is the `bool` from every `call`/`send`/`delegatecall` checked?"},
-        {"id": "SC-LL-2", "question": "Any `delegatecall` to an untrusted/user-controlled target?"},
-        {"id": "SC-LL-3", "question": "Can a callee return-bomb the caller (unbounded returndata)?"},
-        {"id": "SC-LL-4", "question": "Is a `call` to a possibly-codeless address treated as success? (phantom function)"}
+        {
+          "id": "SC-LL-1",
+          "question": "Is the `bool` from every `call`/`send`/`delegatecall` checked?"
+        },
+        {
+          "id": "SC-LL-2",
+          "question": "Any `delegatecall` to an untrusted/user-controlled target?"
+        },
+        {
+          "id": "SC-LL-3",
+          "question": "Can a callee return-bomb the caller (unbounded returndata)?"
+        },
+        {
+          "id": "SC-LL-4",
+          "question": "Is a `call` to a possibly-codeless address treated as success? (phantom function)"
+        }
       ]
     },
     {
@@ -239,13 +509,37 @@
       "name": "Input Validation & Uninitialized State",
       "kb": "knowledge-base/vulnerabilities/input-validation.md",
       "items": [
-        {"id": "SC-INPUT-1", "question": "Zero-address checks on setters and transfers?"},
-        {"id": "SC-INPUT-2", "question": "Zero-amount / dust edge cases handled without corrupting accounting?"},
-        {"id": "SC-INPUT-3", "question": "Array-length equality checked in batch functions?"},
-        {"id": "SC-INPUT-4", "question": "Every critical variable initialized before use; parameters range-checked?"},
-        {"id": "SC-INPUT-5", "question": "Do callbacks (flash-loan, Uniswap `swap`/`mint`, ERC-721 receiver) verify `msg.sender` is the expected pool/lender and that the initiator is this contract?", "added_from": "case study 2023-04-09 SushiSwap RouteProcessor2"},
-        {"id": "SC-INPUT-6", "question": "Can user-supplied addresses or calldata make the contract perform an arbitrary external call (router, target, token), including `transferFrom` against other users' approvals?", "added_from": "Dexible, Transit Swap, Socket"},
-        {"id": "SC-INPUT-7", "question": "Does any mapping lookup treat the zero/default value (`bytes32(0)`, `address(0)`, `0`) as valid or \"confirmed\"?", "added_from": "case study 2022-08-01 Nomad"}
+        {
+          "id": "SC-INPUT-1",
+          "question": "Zero-address checks on setters and transfers?"
+        },
+        {
+          "id": "SC-INPUT-2",
+          "question": "Zero-amount / dust edge cases handled without corrupting accounting?"
+        },
+        {
+          "id": "SC-INPUT-3",
+          "question": "Array-length equality checked in batch functions?"
+        },
+        {
+          "id": "SC-INPUT-4",
+          "question": "Every critical variable initialized before use; parameters range-checked?"
+        },
+        {
+          "id": "SC-INPUT-5",
+          "question": "Do callbacks (flash-loan, Uniswap `swap`/`mint`, ERC-721 receiver) verify `msg.sender` is the expected pool/lender and that the initiator is this contract?",
+          "added_from": "case study 2023-04-09 SushiSwap RouteProcessor2"
+        },
+        {
+          "id": "SC-INPUT-6",
+          "question": "Can user-supplied addresses or calldata make the contract perform an arbitrary external call (router, target, token), including `transferFrom` against other users' approvals?",
+          "added_from": "Dexible, Transit Swap, Socket"
+        },
+        {
+          "id": "SC-INPUT-7",
+          "question": "Does any mapping lookup treat the zero/default value (`bytes32(0)`, `address(0)`, `0`) as valid or \"confirmed\"?",
+          "added_from": "case study 2022-08-01 Nomad"
+        }
       ]
     }
   ],
@@ -388,5 +682,97 @@
       "SOL-Token-NfE1-2": "reentrancy",
       "SOL-Token-NfE1-3": "reentrancy"
     }
-  }
+  },
+  "hunters": [
+    {
+      "slug": "callbacks-and-liveness",
+      "name": "Callbacks, reentrancy & liveness",
+      "categories": [
+        "reentrancy",
+        "denial-of-service",
+        "low-level-calls"
+      ],
+      "focus": "Every external call and every callback window. For each one: what state is stale while control is outside the contract, which other functions (in this contract, the comptroller, sibling markets, integrators reading views) can be entered from there, what happens if the callee reverts, consumes all gas, returns garbage or nothing, or has no code at all.",
+      "start_with": [
+        "List every external call and callback (token transfers, ETH sends, hooks, flash-loan callbacks, delegatecalls) with the state written before and after it.",
+        "For each callback window, enumerate the functions reachable from it and the views other protocols might read mid-call.",
+        "For each loop or batch payout, find the single element that can make the whole thing revert forever."
+      ]
+    },
+    {
+      "slug": "accounting-and-math",
+      "name": "Accounting & math",
+      "categories": [
+        "arithmetic-and-precision",
+        "defi-logic"
+      ],
+      "focus": "Every division, rounding direction, exchange rate, share price and solvency check. Mirror functions (deposit/withdraw, mint/redeem, borrow/repay, normal/emergency paths) must be symmetric; empty or near-empty markets, one-wei remainders and repeated tiny operations must be modelled explicitly.",
+      "start_with": [
+        "Table every formula that converts between assets, shares, debt and collateral, with its rounding direction and who profits from it.",
+        "For every function that reduces collateral or increases debt (including donate/emergency/migrate/rescue helpers), confirm the same post-state solvency check as the primary path.",
+        "Simulate totalSupply == 0, 1 and 2 wei, and the first depositor after a full exit."
+      ]
+    },
+    {
+      "slug": "tokens-and-oracles",
+      "name": "Tokens & price sources",
+      "categories": [
+        "token-integration",
+        "oracle-and-price-manipulation"
+      ],
+      "focus": "Which tokens can enter the system and what non-standard behaviour they bring (fee-on-transfer, rebasing, hooks, missing return values, blacklists, phantom functions, odd decimals), and every place a price or exchange rate is read: where it comes from, whether it can be moved in the same transaction, and what happens when it is stale, zero or reverts.",
+      "start_with": [
+        "List the tokens in scope (or the rule for listing new ones) and check each core token-integration item against the transfer/approve/permit call sites.",
+        "List every price read (oracle call, reserve ratio, balanceOf-based ratio, get_virtual_price, pricePerShare, exchangeRate) and classify it as spot / TWAP / external feed / internal accounting.",
+        "For each spot or balance-derived read, write the one-transaction manipulation that moves it and estimate the capital needed."
+      ]
+    },
+    {
+      "slug": "privilege-and-upgrade",
+      "name": "Privilege, upgrades, governance & signatures",
+      "categories": [
+        "access-control",
+        "upgradeability",
+        "governance",
+        "signatures"
+      ],
+      "focus": "Who may call what, and whether that answer changes under initializers, proxies, storage layout, role administration, votes and signed messages or proofs. Assume every privileged path will be probed by an unprivileged caller and every signed payload will be replayed.",
+      "start_with": [
+        "Build the actor/permission matrix from the attack-surface table and mark every state-changing function that is not gated or is gated by the wrong role.",
+        "For proxies: map the storage layout of proxy and implementation side by side, find every initializer and check it cannot be run again or by anyone.",
+        "For governance and signatures: where is voting power or the signer read, at which block, bound to which domain, nonce and deadline."
+      ]
+    },
+    {
+      "slug": "economics-and-ordering",
+      "name": "Atomic capital, ordering & randomness",
+      "categories": [
+        "flash-loans",
+        "front-running-mev",
+        "randomness"
+      ],
+      "focus": "What breaks when the attacker has unlimited capital for one block, controls transaction ordering, or can predict and abort outcomes. Includes protocol-owned operations (rebalances, harvests, fee conversions) that swap without bounds, and any value-bearing outcome derived from block data.",
+      "start_with": [
+        "For each invariant from Phase 1, ask whether a flash loan lets it be violated and restored within one transaction.",
+        "List every swap or liquidity operation (user-initiated and protocol-initiated) and check for slippage bounds, deadlines and price bands.",
+        "List every read of block.timestamp, blockhash, prevrandao or difficulty and every two-step action an attacker can front-run or back-run."
+      ]
+    },
+    {
+      "slug": "boundaries-and-inputs",
+      "name": "Inputs, cross-chain boundaries & hygiene",
+      "categories": [
+        "input-validation",
+        "bridges-cross-chain",
+        "general-hygiene"
+      ],
+      "focus": "Every parameter, callback caller and decoded payload the contract trusts; arbitrary external calls built from user input; zero and default values treated as valid; cross-chain messages and their binding to source, destination, payload and validator set; and the compiler / library versions in use (Appendix A).",
+      "start_with": [
+        "For every external/public function, list each parameter and how it is validated (zero, range, length equality, whitelist, caller identity).",
+        "Find every place a user-supplied address is called or a user-supplied calldata is forwarded, and every callback whose msg.sender is not checked against the contract just called.",
+        "Record pragma and library versions and walk only the Appendix A rows whose range matches."
+      ],
+      "include_appendices": true
+    }
+  ]
 }

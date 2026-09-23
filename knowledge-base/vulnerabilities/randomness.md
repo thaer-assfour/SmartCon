@@ -51,4 +51,4 @@ function fulfillRandomWords(uint256, uint256[] memory words) internal override {
 - Multiple on-chain lotteries/games drained by precomputing the blockhash-based draw.
 
 ## Checklist mapping
-[Checklist §13 — Weak Randomness](../../methodology/checklist.md#13-weak-randomness--notes)
+[Checklist §13 — Weak Randomness](../../methodology/checklist.md#13-weak-randomness)

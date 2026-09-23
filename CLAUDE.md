@@ -23,9 +23,12 @@ Full detail in [`methodology/phases.md`](methodology/phases.md). Do not skip ahe
    `MYTHRIL=1` for slow per-file symbolic execution); triage each signal (TP / FP /
    needs-check) and map it to a checklist item ID.
 4. **Manual deep review** — copy [`templates/coverage-matrix.md`](templates/coverage-matrix.md)
-   into the engagement and walk [`methodology/checklist.md`](methodology/checklist.md)
-   against the attack surface, recording an answer with evidence per item per contract;
-   for each invariant, try to break it. Tag every hypothesis with the item ID behind it.
+   into the engagement, then dispatch the six hunter briefs in
+   [`templates/hunters/`](templates/hunters/README.md) as parallel read-only sub-agents
+   (same packet: target, scope, Phase 1 invariants, Phase 2 attack surface, Phase 3
+   signals), merge their hypotheses by root cause, re-dispatch cross-cluster leads, and
+   paste their coverage rows into the matrix. Tag every hypothesis with the item ID
+   behind it. Alone, walk the six briefs in turn.
 5. **Proof of concept** — prove it. Start from [`templates/poc/`](templates/poc/); fork
    or mock; assert quantified impact.
 5b. **Verify** — hand each finding, its PoC and the in-scope source to a fresh sub-agent
@@ -54,10 +57,10 @@ protocol's shape makes relevant. An unanswered checklist question is an open lea
 pass.
 
 **Generated files, never edit by hand:** `methodology/checklist.md`, `checklist.json`,
-`checklist-reference.md`, `templates/coverage-matrix.md`,
+`checklist-reference.md`, `templates/coverage-matrix.md`, `templates/hunters/*.md`,
 `knowledge-base/case-studies/README.md`. Change
 [`methodology/checklist-map.json`](methodology/checklist-map.json) (core questions,
-placement of upstream items) or add a case study from
+placement of upstream items, hunter clustering) or add a case study from
 [`knowledge-base/case-studies/TEMPLATE.md`](knowledge-base/case-studies/TEMPLATE.md), then
 run `python3 tools/build-checklist.py`. `--check` must pass before committing.
 
