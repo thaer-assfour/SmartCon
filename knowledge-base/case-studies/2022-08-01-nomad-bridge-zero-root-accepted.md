@@ -106,6 +106,6 @@ require(_root != bytes32(0) || _confirmAt == 0, "can't set zero root");
   initializer or upgrade ever set the zero key to a truthy value?"*
 
 ## References
-- Post-mortem: samczsun thread (twitter.com/samczsun/status/1554252024723546112) and CertiK incident analysis — not reachable from this environment. DeFiHackLabs "Hack Analysis: Nomad Bridge" lesson (by gmhacker.eth / Immunefi) was read here and corroborates the `process`/`initialize`/`acceptableRoot` chain and the April-21 upgrade that set root `0x00`.
+- Post-mortem: samczsun thread (twitter.com/samczsun/status/1554252024723546112) and CertiK incident analysis; not reachable from this environment. DeFiHackLabs "Hack Analysis: Nomad Bridge" lesson (by gmhacker.eth / Immunefi) was read here and corroborates the `process`/`initialize`/`acceptableRoot` chain and the April-21 upgrade that set root `0x00`.
 - Transaction(s): example process `0xa5fe9d044e4f3e5aa5bc4c0709333cd2190cba0f4e7f16bcf73f49f83e4a5460`; init tx that set the trusted root `0x53fd92771d2084a9bf39a6477015ef53b7f116c79d98a21be723d06d79024cad`; Replica proxy `0x5d94309e5a0090b165fa4181519701637b6daeba`, vulnerable logic `0xb92336759618f55bd0f8313bd843604592e27bd8`. Audit: Quantstamp QSP-19 "Proving With An Empty Leaf".
 - Related audits / similar incidents: BNB Bridge (2022) forged Merkle proof; both are proof/root verification failures.

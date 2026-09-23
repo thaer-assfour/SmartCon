@@ -102,6 +102,6 @@ can only reach designated business contracts, never the manager's own data/keepe
   target, any contract that the relayer/executor is itself the privileged owner or admin of?"*
 
 ## References
-- Post-mortem: SlowMist root-cause analysis and rekt.news/polynetwork-rekt — not reachable from this environment; the analysis is quoted in the PoC comments. Source at github.com/polynetwork/eth-contracts commit `d16252b2b857eecf8e558bd3e1f3bb14cff30e9b` (read here).
+- Post-mortem: SlowMist root-cause analysis and rekt.news/polynetwork-rekt; not reachable from this environment; the analysis is quoted in the PoC comments. Source at github.com/polynetwork/eth-contracts commit `d16252b2b857eecf8e558bd3e1f3bb14cff30e9b` (read here).
 - Transaction(s): Ethereum `0xb1f70464bd95b774c6ce60fc706eb5f9e35cb5f06e6cfe7c17dcda46ffd59581`; ECCM `0x838bf9E95CB12Dd76a54C9f9D2E3082EAF928270`; ECCD `0xcF2afe102057bA5c16f899271045a0A37fCb10f2`; exploiter `0xC8a65Fadf0e0dDAf421F28FEAb69Bf6E2E589963`. Per-chain splits were not verified from a reachable primary source.
 - Related audits / similar incidents: Wormhole (2022) signature-verification flaw and Ronin (2022) validator-key compromise are the other end of the bridge-authorization spectrum.

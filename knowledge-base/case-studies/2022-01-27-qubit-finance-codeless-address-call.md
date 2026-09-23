@@ -97,6 +97,6 @@ require(contractWhitelist[tokenAddress], "not whitelisted");
   token has code before trusting its success?"*
 
 ## References
-- Post-mortem: rekt.news/qubit-rekt and Qubit's own report (medium.com/@QubitFin/protocol-exploit-report-305c34540fa3) — not reachable from this environment; behaviour confirmed against the PoC.
+- Post-mortem: rekt.news/qubit-rekt and Qubit's own report (medium.com/@QubitFin/protocol-exploit-report-305c34540fa3); not reachable from this environment; behaviour confirmed against the PoC.
 - Transaction(s): ETH deposit `0xac7292e7d0ec8ebe1c94203d190874b2aab30592327b6cc875d00f18de6f3133`; BSC mint `0x50946e3e4ccb7d39f3512b7ecb75df66e6868b9af0eee8a7e4b61ef8a459518e`. Per the PoC, QBridge is `0x20E5E35ba29dC3B540a1aee781D0814D5c77Bce6` and the handler `0x17B7163cf1Dbd286E262ddc68b553D899B93f526`; `0xd01ae1a708614948b2b5e0b7ab5be6afa01325c7` is the attacker EOA (the task brief labelled this as "QBridge", which the PoC contradicts).
 - Related audits / similar incidents: general phantom-function class where a `call`/`safeTransfer` to a non-contract is read as a successful integration.

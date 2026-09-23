@@ -99,6 +99,6 @@ constant cannot drift apart, and keep a differential test against the upstream p
   reserve product is non-decreasing after fees for adversarial swap sizes?"*
 
 ## References
-- Post-mortem: Immunefi, "Building a PoC for the Uranium Heist" (medium.com/immunefi/building-a-poc-for-the-uranium-heist-ec83fbd83e9f) — not reachable from this environment; the vulnerable code is quoted in the PoC header.
+- Post-mortem: Immunefi, "Building a PoC for the Uranium Heist" (medium.com/immunefi/building-a-poc-for-the-uranium-heist-ec83fbd83e9f); not reachable from this environment; the vulnerable code is quoted in the PoC header.
 - Transaction(s): attack `0x5a504fe72ef7fc76dfeb4d979e533af4e23fe37e90b5516186d5787893c37991`; attack contract `0x2b528a28451e9853f51616f3b0f6d82af8bea6ae`; factory `0xA943eA143cd7E79806d670f4a7cf08F8922a454F`.
 - Related audits / similar incidents: any Uniswap v2/v3 fork that edited fee math; general class of "changed a magic number on one side of the invariant only".

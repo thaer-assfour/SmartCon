@@ -95,6 +95,6 @@ prediction and the revert-on-loss vectors (SC-RAND-3).
   in a later block it cannot pre-read?"*
 
 ## References
-- Post-mortem: @1nf0s3cpt thread (twitter.com/1nf0s3cpt/status/1576117129589317633) — not reachable from this environment; mechanism taken from the PoC and the referenced `0xNezha/luckyHack` source.
+- Post-mortem: @1nf0s3cpt thread (twitter.com/1nf0s3cpt/status/1576117129589317633); not reachable from this environment; mechanism taken from the PoC and the referenced `0xNezha/luckyHack` source.
 - Transaction(s): attack `0x804ff3801542bff435a5d733f4d8a93a535d73d0de0f843fd979756a7eab26af`; NFT contract `0x9c87A5726e98F2f404cdd8ac8968E9b2C80C0967`.
 - Related audits / similar incidents: numerous NFT mints with block-hash "rarity" gamed by minting from a contract that reverts unless the traits are rare; on-chain lotteries drained by precomputing a blockhash draw.

@@ -98,14 +98,14 @@ function uniswapV3SwapCallback(int256 a0, int256 a1, bytes calldata data) extern
   from the current operation's initiator, never an address decoded from callback data?"*
 
 ## References
-- Post-mortem: PeckShield thread (twitter.com/peckshield/status/1644907207530774530) — not reachable from this environment; behaviour confirmed against the PoC (header: "does not check user input `route` carefully").
+- Post-mortem: PeckShield thread (twitter.com/peckshield/status/1644907207530774530); not reachable from this environment; behaviour confirmed against the PoC (header: "does not check user input `route` carefully").
 - Transaction(s): `0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32`; RouteProcessor2 `0x044b75f554b886A065b9567891e45c79542d7357`; example victim `0x31d3243CfB54B34Fc9C73e1CB1137124bD6B13E1`.
 - Related audits / similar incidents (same "arbitrary external call from user input" class):
-  **Dexible (2023-02-17, ~$1.5M)** — `selfSwap` took a caller-supplied `router` and
+  **Dexible (2023-02-17, ~$1.5M)**: `selfSwap` took a caller-supplied `router` and
   `routerData`, so the attacker passed `router = TRU token` and `routerData = transferFrom(victim, attacker, amount)`
   to drain approvals; tx `0x138daa4cbeaa3db42eefcec26e234fc2c89a4aa17d6b1870fc460b2856fd11a6`,
   PoC `src/test/2023-02/Dexible_exp.sol`.
-  **Transit Swap (2022-10-02, >$21M, BSC)** — the swap/claim path (`claimTokens` / `callBytes`)
+  **Transit Swap (2022-10-02, >$21M, BSC)**: the swap/claim path (`claimTokens` / `callBytes`)
   performed `transferFrom` with an unverified, caller-supplied owner and target, letting the
   attacker move any prior approver's tokens; tx
   `0x181a7882aac0eab1036eedba25bc95a16e10f61b5df2e99d240a16c334b9b189`, PoC

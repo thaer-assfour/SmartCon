@@ -127,6 +127,6 @@ capital to make bidders whole, and the 11,539.5 ETH remained locked in the contr
   condition is guaranteed to become satisfiable?"*
 
 ## References
-- Post-mortem: BlockSec, "How Akutar NFT Loses $34M USD" (blocksecteam.medium.com/how-akutar-nft-loses-34m-usd-60d6cb053dff) — not reachable from this environment; mechanism taken from the PoC header.
+- Post-mortem: BlockSec, "How Akutar NFT Loses $34M USD" (blocksecteam.medium.com/how-akutar-nft-loses-34m-usd-60d6cb053dff); not reachable from this environment; mechanism taken from the PoC header.
 - Transaction(s): auction-end / refund tx `0x62d280abc60f8b604175ab24896c989e6092e496ac01f2f5399b2a62e9feaacf` (referenced in the PoC); contract `0xf42c318dbfBaab0EEE040279C6a2588Fa01a961d`.
 - Related audits / similar incidents: GovernMental and King-of-the-Ether push-payment DoS; any batch airdrop bricked by one reverting recipient.
