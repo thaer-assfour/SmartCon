@@ -35,10 +35,31 @@ Six phases, each feeding the next. Full detail in [`methodology/phases.md`](meth
 | 3 | **Automated Analysis** | Run static/dynamic tooling to catch known patterns | Triaged signal list |
 | 4 | **Manual Deep Review** | Hunt business-logic flaws, edge cases, broken invariants | Vulnerability hypotheses |
 | 5 | **Proof of Concept** | Prove exploitability with a Foundry test | Runnable PoC |
+| 5b | **Verify** | Try to demote every finding before writing it up: reachability, preconditions, capital, PoC quality, independent severity | Verification record per finding |
 | 6 | **Reporting** | Impact, exploit scenario, fix, severity | Submission-ready report |
 
 The [checklist](methodology/checklist.md) is applied during phases 3–4 and is the
 spine of the whole project.
+
+---
+
+## The checklist
+
+[`methodology/checklist.md`](methodology/checklist.md) has 17 categories. Each holds
+SmartCon's own **core** questions (`SC-*`, 93 items) followed by the **extended** items
+of the [Cyfrin / Solodit aggregated audit checklist](https://solodit.cyfrin.io/checklist)
+(`SOL-*`, 370 items) placed under the category they belong to, plus an appendix of
+compiler- and library-version-specific checks. Every ID links to
+[`methodology/checklist-reference.md`](methodology/checklist-reference.md), which carries
+the description, remediation, Solodit references to paid findings of the same class, and
+the [case studies](knowledge-base/case-studies/README.md) of real hacks that cite the
+item. [`templates/coverage-matrix.md`](templates/coverage-matrix.md) is the
+per-engagement record of which item was answered for which contract.
+
+The checklist is **generated**. Edit [`methodology/checklist-map.json`](methodology/checklist-map.json)
+(core questions, placement of upstream items) or add a case study, then run
+`python3 tools/build-checklist.py`; `--check` validates everything and `--fetch` refreshes
+the vendored upstream copy under [`methodology/upstream/`](methodology/upstream/).
 
 ---
 
@@ -48,8 +69,12 @@ spine of the whole project.
 SmartCon/
 ├── README.md                         # You are here
 ├── methodology/
-│   ├── phases.md                     # The 6 phases in detail
-│   ├── checklist.md                  # Full category-driven review checklist
+│   ├── phases.md                     # The 6 phases (+ the 5b verify gate) in detail
+│   ├── checklist-map.json            # SOURCE: 17 categories, core questions, upstream placement
+│   ├── checklist.md                  # GENERATED: the checklist auditors walk (core + extended)
+│   ├── checklist-reference.md        # GENERATED: description / remediation / references per ID
+│   ├── checklist.json                # GENERATED: machine-readable merged checklist
+│   ├── upstream/                     # Vendored Cyfrin / Solodit checklist + provenance
 │   └── severity-classification.md    # How to rate impact (Immunefi-aligned)
 ├── knowledge-base/
 │   ├── vulnerabilities/              # One file per vulnerability class (16)
@@ -70,15 +95,20 @@ SmartCon/
 │   │   ├── low-level-calls.md
 │   │   └── input-validation.md
 │   └── case-studies/
-│       └── TEMPLATE.md               # Structure for post-mortem write-ups
+│       ├── README.md                 # GENERATED index of the case studies
+│       ├── TEMPLATE.md               # Structure for post-mortem write-ups
+│       └── YYYY-MM-DD-*.md           # Real hacks mapped to checklist IDs (DeFiHackLabs PoCs)
 ├── tools/
-│   ├── setup.sh                      # Install Foundry, Slither, Aderyn, ...
-│   └── scan.sh                       # Run the automated toolchain over a target
+│   ├── setup.sh                      # Install Foundry, Slither, Aderyn, Mythril, Semgrep
+│   ├── scan.sh                       # Run the automated toolchain over a target (MYTHRIL=1 opt-in)
+│   └── build-checklist.py            # Regenerate checklist.md / .json / reference / matrix / index
 ├── scripts/
 │   └── recon.sh                      # Pull verified source for an on-chain address
 ├── templates/
 │   ├── poc/                          # Ready-to-run Foundry PoC scaffold
 │   ├── report.md                     # Vulnerability report template
+│   ├── verify.md                     # Phase 5b rubric: try to demote your own finding
+│   ├── coverage-matrix.md            # GENERATED: per-engagement checklist coverage record
 │   └── audit-notes.md                # Per-engagement working notes
 ├── examples/
 │   └── reentrancy-demo/              # Runnable worked example (Phase 3 + Phase 5)
@@ -97,7 +127,9 @@ SmartCon is a first-class Claude Code project:
 - **`CLAUDE.md`** is loaded automatically and makes Claude Code follow the six-phase
   methodology and the checklist when auditing a contract.
 - **`/smartcon`** skill runs the whole audit on a target (and auto-triggers on requests
-  like "audit this contract" or "find bugs in this Solidity").
+  like "audit this contract" or "find bugs in this Solidity"). In Phase 5b it hands each
+  finding to a fresh sub-agent with [`templates/verify.md`](templates/verify.md), whose
+  only job is to demote it.
 - **SessionStart hook** installs Slither and the example's `solc-js`/EVM deps so
   `tools/scan.sh` and the worked example run immediately. It takes effect for future
   sessions once merged into the default branch.
@@ -125,12 +157,20 @@ export ETHERSCAN_API_KEY=your_key
 ./scripts/recon.sh 0xTargetContractAddress ./engagements/my-target
 
 # 3. Run the automated toolchain and collect a combined report
-./tools/scan.sh ./engagements/my-target
+./tools/scan.sh ./engagements/my-target            # MYTHRIL=1 to add symbolic execution
 
-# 4. Work the checklist manually, then write your PoC from templates/poc/
+# 4. Work the checklist manually, recording every answer in the coverage matrix,
+#    then write your PoC from templates/poc/
+cp templates/coverage-matrix.md engagements/my-target/
 
-# 5. Draft the finding
+# 5. Try to demote your own finding before writing it up
+cp templates/verify.md engagements/my-target/verify-01.md
+
+# 6. Draft the finding
 cp templates/report.md engagements/my-target/finding-01.md
+
+# Maintaining the checklist: edit methodology/checklist-map.json or add a case study, then
+python3 tools/build-checklist.py            # regenerate;  --check validates, --fetch refreshes upstream
 ```
 
 ---

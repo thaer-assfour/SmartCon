@@ -2,7 +2,9 @@
 
 This is the backbone of SmartCon. Every engagement runs through these phases in
 order. Earlier phases produce artifacts that later phases consume, so do not skip
-ahead — a weak attack-surface map produces a shallow review.
+ahead — a weak attack-surface map produces a shallow review. Between the PoC and the
+report sits a mandatory gate, **Phase 5b — Verify**, where a fresh pair of eyes tries
+to demote every finding before it is written up.
 
 ---
 
@@ -67,15 +69,16 @@ Solidity Visual Developer, hand-drawn call graphs.
 **Do:**
 
 - Run [`tools/scan.sh`](../tools/scan.sh): Slither, Aderyn, and Semgrep Solidity
-  rules over the target.
+  rules over the target; `MYTHRIL=1` adds per-file Mythril symbolic execution (slow,
+  worth it on small cores with arithmetic or access-control complexity).
 - Triage every finding: **true positive**, **false positive**, or **needs manual
   confirmation**. Do not trust or dismiss blindly — each detector output is a
   *lead*, not a verdict.
 - Stand up property-based fuzzing where invariants are known (Foundry invariant
   tests, Echidna/Medusa) to try to break the invariants you wrote down in Phase 1.
 
-**Output:** A triaged list of signals, each mapped to a checklist category and
-marked with a confidence level.
+**Output:** A triaged list of signals, each mapped to a checklist item ID
+([`checklist.md`](checklist.md)) and marked with a confidence level.
 
 **Tools:** Slither, Aderyn, Semgrep, Foundry (`forge test`, invariant testing),
 Echidna / Medusa, Mythril (targeted symbolic execution).
@@ -92,8 +95,16 @@ where Critical findings come from.
 
 **Do:**
 
-- Walk the [checklist](checklist.md) category by category against the attack-surface
-  map. For each entry point, ask the category's questions explicitly.
+- Copy [`templates/coverage-matrix.md`](../templates/coverage-matrix.md) into the
+  engagement and walk the [checklist](checklist.md) category by category against the
+  attack-surface map. Answer every `SC-*` core question for every in-scope contract,
+  then the `SOL-*` extended items (imported from the Cyfrin/Solodit checklist) for each
+  category the protocol's shape makes relevant, and Appendix A for the compiler and
+  library versions in use. Record the answer and its evidence in the matrix; a `?` is an
+  open lead. [`checklist-reference.md`](checklist-reference.md) carries the description,
+  remediation and Solodit references behind every ID, and the linked
+  [case studies](../knowledge-base/case-studies/README.md) show what each question
+  looked like in a real incident.
 - For each intended invariant from Phase 1, actively try to construct a state that
   violates it. Think like an attacker who controls the calldata, the ordering, and
   can supply malicious tokens/contracts.
@@ -105,8 +116,9 @@ where Critical findings come from.
 - Keep a running hypotheses log in [`templates/audit-notes.md`](../templates/audit-notes.md):
   each suspected issue, the assumption it breaks, and how you'd test it.
 
-**Output:** A ranked list of vulnerability hypotheses, each with a rough impact and
-a plan to prove it.
+**Output:** A ranked list of vulnerability hypotheses, each tagged with the checklist
+item ID that produced it, a rough impact and a plan to prove it; plus the filled
+coverage matrix.
 
 **Tools:** your eyes, the checklist, the knowledge base, `cast`/Tenderly for state
 inspection, Foundry for quick experiments.
@@ -137,6 +149,38 @@ plus the measured loss.
 
 ---
 
+## Phase 5b — Verify
+
+**Goal:** Try to kill your own finding before a triager does. Most "Critical" reports
+that get closed as Low or Invalid fail on preconditions, on an out-of-scope actor, or on
+a PoC that proves less than the report claims. Catching that here costs an hour; on the
+platform it costs reputation.
+
+**Do:**
+
+- For every finding with a PoC, fill a copy of [`templates/verify.md`](../templates/verify.md).
+  The verifier should be someone (or a fresh agent) who did not find the bug, with only
+  the draft finding, the PoC, the in-scope source and the program rules.
+- Work the rubric in order: **reachability** in the deployed configuration;
+  **preconditions and actors** (trusted role acting maliciously? victim acting
+  irrationally? exotic token or market state?); **capital, cost and profit** (is it
+  flash-loanable, does profit survive gas and slippage, is it repeatable?); **PoC
+  quality** (real state or unmodified in-scope code, quantified assertions, cheat-codes
+  only in setup); **known issues and duplicates** (program scope, prior audits, Solodit);
+  **severity re-derived independently** from [`severity-classification.md`](severity-classification.md);
+  **fix validity** (re-run the PoC against the patch).
+- Record the verdict: **CONFIRMED** (proceed as claimed), **DOWNGRADED** (rewrite
+  Summary and Severity first) or **REJECTED** (log the reason in the audit notes so the
+  hypothesis is not re-opened). New hypotheses discovered while verifying go back to
+  Phase 4.
+
+**Output:** One verification record per finding, and a findings list where every
+severity has been derived twice.
+
+**Tools:** the rubric, a fresh reviewer or sub-agent, the PoC, the program's scope page.
+
+---
+
 ## Phase 6 — Reporting
 
 **Goal:** Communicate the finding so a triager can validate it in minutes and a
@@ -149,7 +193,8 @@ developer can fix it correctly.
 - Assign severity using [`severity-classification.md`](severity-classification.md).
   Be honest — over-claiming severity burns credibility.
 - Include the exact file, function, and line references, and the commit/deployment
-  you reviewed.
+  you reviewed; cite the checklist item IDs that surfaced the bug and attach the
+  Phase 5b verdict.
 - Follow **responsible disclosure**: report privately through the program's channel,
   never disclose publicly before a fix, and never exploit beyond what's needed to
   prove the bug. Provide the minimal PoC, not a weaponized exploit.
@@ -174,6 +219,8 @@ Phase 1 invariants ────────────────────�
                                               vulnerability hypotheses
                                                           │
                                               Phase 5 PoC (prove + quantify)
+                                                          │
+                                              Phase 5b Verify (demote or confirm)
                                                           │
                                               Phase 6 Report (impact-first)
 ```

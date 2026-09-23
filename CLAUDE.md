@@ -19,23 +19,47 @@ Full detail in [`methodology/phases.md`](methodology/phases.md). Do not skip ahe
    map architecture and money flow. Output → contract inventory + invariants.
 2. **Attack surface** — enumerate every `external`/`public` function (caller, effect,
    value moved, assumptions); map trust boundaries and external calls.
-3. **Automated analysis** — run [`tools/scan.sh <target>`](tools/scan.sh); triage each
-   signal (TP / FP / needs-check) and map it to a checklist category.
-4. **Manual deep review** — walk [`methodology/checklist.md`](methodology/checklist.md)
-   category by category against the attack surface; for each invariant, try to break it.
+3. **Automated analysis** — run [`tools/scan.sh <target>`](tools/scan.sh) (add
+   `MYTHRIL=1` for slow per-file symbolic execution); triage each signal (TP / FP /
+   needs-check) and map it to a checklist item ID.
+4. **Manual deep review** — copy [`templates/coverage-matrix.md`](templates/coverage-matrix.md)
+   into the engagement and walk [`methodology/checklist.md`](methodology/checklist.md)
+   against the attack surface, recording an answer with evidence per item per contract;
+   for each invariant, try to break it. Tag every hypothesis with the item ID behind it.
 5. **Proof of concept** — prove it. Start from [`templates/poc/`](templates/poc/); fork
    or mock; assert quantified impact.
+5b. **Verify** — hand each finding, its PoC and the in-scope source to a fresh sub-agent
+   with [`templates/verify.md`](templates/verify.md) whose job is to *demote* it
+   (reachability, preconditions and actors, capital and cost, PoC quality, known issues,
+   independent severity, fix validity). Verdicts: CONFIRMED / DOWNGRADED / REJECTED.
+   Nothing reaches Phase 6 without a verdict; downgraded findings are rewritten first.
 6. **Reporting** — write it up from [`templates/report.md`](templates/report.md); rate
-   severity with [`methodology/severity-classification.md`](methodology/severity-classification.md).
+   severity with [`methodology/severity-classification.md`](methodology/severity-classification.md);
+   cite the checklist IDs and the verification verdict.
 
 Keep running notes in a copy of [`templates/audit-notes.md`](templates/audit-notes.md).
 
 ## The checklist is the spine
 
-[`methodology/checklist.md`](methodology/checklist.md) has 17 categories, each linked to
-a deep-dive in [`knowledge-base/vulnerabilities/`](knowledge-base/vulnerabilities/).
-During phases 3–4, apply every category to every entry point. An unanswered checklist
-question is an open lead, not a pass.
+[`methodology/checklist.md`](methodology/checklist.md) has 17 categories. Each holds
+SmartCon's core questions (`SC-*`) and the extended items imported from the Cyfrin /
+Solodit checklist (`SOL-*`), followed by an appendix of compiler- and library-version
+checks; every ID links to its description, remediation, Solodit references and the real
+hacks in [`knowledge-base/case-studies/`](knowledge-base/case-studies/README.md) that
+cite it ([`methodology/checklist-reference.md`](methodology/checklist-reference.md)).
+Each category is linked to a deep-dive in
+[`knowledge-base/vulnerabilities/`](knowledge-base/vulnerabilities/). During phases 3–4,
+apply every core item to every entry point and the extended items of every category the
+protocol's shape makes relevant. An unanswered checklist question is an open lead, not a
+pass.
+
+**Generated files, never edit by hand:** `methodology/checklist.md`, `checklist.json`,
+`checklist-reference.md`, `templates/coverage-matrix.md`,
+`knowledge-base/case-studies/README.md`. Change
+[`methodology/checklist-map.json`](methodology/checklist-map.json) (core questions,
+placement of upstream items) or add a case study from
+[`knowledge-base/case-studies/TEMPLATE.md`](knowledge-base/case-studies/TEMPLATE.md), then
+run `python3 tools/build-checklist.py`. `--check` must pass before committing.
 
 ## Tooling notes for this environment
 
@@ -54,7 +78,10 @@ question is an open lead, not a pass.
 
 [`examples/reentrancy-demo/`](examples/reentrancy-demo/) runs Phase 3 (Slither) + Phase 5
 (executed exploit) end to end via `./run.sh`. Use it as the reference shape for new
-findings, including the write-up in `finding-01-reentrancy.md`.
+findings, including the write-up in `finding-01-reentrancy.md`. The case studies under
+[`knowledge-base/case-studies/`](knowledge-base/case-studies/README.md) show, for real
+incidents, which checklist question would have caught the bug; read the matching one
+before building a PoC for a similar hypothesis.
 
 ## Ground rules
 

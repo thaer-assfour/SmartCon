@@ -24,3 +24,6 @@ ETHERSCAN_API_KEY
 *.swp
 .idea/
 .vscode/
+
+# Python
+__pycache__/

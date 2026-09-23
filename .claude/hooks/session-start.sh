@@ -34,6 +34,16 @@ if [ -f "$DEMO/package.json" ] && have npm; then
   fi
 fi
 
+# --- Checklist corpus (generated files must match their sources) ---------------
+if have python3 && [ -f "$PROJECT_DIR/tools/build-checklist.py" ]; then
+  if out=$(cd "$PROJECT_DIR" && python3 tools/build-checklist.py --check 2>&1); then
+    log "checklist: ${out#\[build-checklist\] }"
+  else
+    log "checklist: STALE or invalid — run: python3 tools/build-checklist.py"
+    printf '%s\n' "$out" | sed 's/^/[smartcon-hook]   /' | head -8
+  fi
+fi
+
 # --- Foundry (best effort; native download may be blocked on the web) --------
 if have forge; then
   log "foundry present"

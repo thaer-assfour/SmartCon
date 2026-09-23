@@ -41,11 +41,13 @@ Ran `tools/scan.sh`. Triage:
 ---
 
 ## Phase 4 — Manual review (checklist coverage)
-Copy the [checklist](../methodology/checklist.md) and mark per contract. Log hypotheses:
+Coverage lives in a copy of [`coverage-matrix.md`](coverage-matrix.md) next to this file
+(one answer with evidence per checklist item per contract). Log hypotheses here, each
+with the item ID that produced it:
 
-| # | Hypothesis | Invariant broken | Impact (rough) | How to prove | Status |
-|---|------------|------------------|----------------|--------------|--------|
-| 1 |  |  |  |  | open |
+| # | Hypothesis | Checklist item(s) | Invariant broken | Impact (rough) | How to prove | Status |
+|---|------------|-------------------|------------------|----------------|--------------|--------|
+| 1 |  |  |  |  |  | open |
 
 ---
 
@@ -53,6 +55,16 @@ Copy the [checklist](../methodology/checklist.md) and mark per contract. Log hyp
 | Hypothesis # | PoC file | Result | Measured impact |
 |--------------|----------|--------|-----------------|
 |  |  |  |  |
+
+---
+
+## Phase 5b — Verification
+One [`verify.md`](verify.md) record per finding, filled by someone (or a fresh sub-agent)
+who did not find the bug. Nothing reaches Phase 6 without a verdict.
+
+| Hypothesis # | Verifier | Claimed severity | Verified severity | Verdict (CONFIRMED / DOWNGRADED / REJECTED) | Record file |
+|--------------|----------|------------------|-------------------|----------------------------------------------|-------------|
+|  |  |  |  |  |  |
 
 ---
 

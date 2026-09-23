@@ -6,8 +6,14 @@
 #
 # Usage:
 #   ./tools/scan.sh <path-to-target-project>
+#   MYTHRIL=1 ./tools/scan.sh <path-to-target-project>      # also run Mythril (slow, opt-in)
 #
 # The target should be a Foundry/Hardhat project or a directory of .sol files.
+#
+# Stages: Slither, Aderyn, Semgrep (always, when installed); Mythril symbolic execution
+# per source file when MYTHRIL=1 (MYTHRIL_TIMEOUT seconds per file, default 300;
+# MYTHRIL_DIRS overrides the source directories, default "src contracts"); Foundry
+# build + tests when the target is a Foundry project.
 #
 set -uo pipefail   # NOTE: not -e; we want every tool to run even if one fails
 
@@ -54,6 +60,41 @@ else
   log "Semgrep not found — skipping"
 fi
 
+# --- Mythril (symbolic execution; opt-in because it is slow) -------------------
+# setup.sh installs Mythril, but a whole-project run can take hours, so it only runs
+# when MYTHRIL=1. Each .sol file under the source dirs is analysed on its own with a
+# per-file timeout; imports are resolved through the project's remappings when present.
+if [ "${MYTHRIL:-0}" = "1" ]; then
+  if have myth; then
+    MYTHRIL_TIMEOUT="${MYTHRIL_TIMEOUT:-300}"
+    MYTHRIL_DIRS="${MYTHRIL_DIRS:-src contracts}"
+    mkdir -p "$OUT/mythril"
+    MYTH_ARGS=()
+    if [ -f "$TARGET/remappings.txt" ] && have python3; then
+      python3 - "$TARGET/remappings.txt" > "$OUT/mythril/solc-settings.json" <<'PY'
+import json, sys
+maps = [l.strip() for l in open(sys.argv[1]) if l.strip() and not l.startswith("#")]
+print(json.dumps({"remappings": maps}))
+PY
+      MYTH_ARGS+=(--solc-json "$OUT/mythril/solc-settings.json")
+    fi
+    for d in $MYTHRIL_DIRS; do
+      [ -d "$TARGET/$d" ] || continue
+      while IFS= read -r -d '' f; do
+        rel="${f#"$TARGET"/}"
+        log "Mythril: $rel (timeout ${MYTHRIL_TIMEOUT}s)"
+        ( cd "$TARGET" && timeout "$((MYTHRIL_TIMEOUT + 60))" \
+            myth analyze "$rel" --execution-timeout "$MYTHRIL_TIMEOUT" "${MYTH_ARGS[@]}" ) \
+            > "$OUT/mythril/$(echo "$rel" | tr '/' '_').txt" 2>&1 || true
+      done < <(find "$TARGET/$d" -name '*.sol' -not -path '*/test/*' -not -path '*/lib/*' -not -path '*/node_modules/*' -print0)
+    done
+  else
+    log "MYTHRIL=1 but myth not found — skipping (run tools/setup.sh)"
+  fi
+elif have myth; then
+  log "Mythril installed but not enabled — set MYTHRIL=1 to run symbolic execution (slow)"
+fi
+
 # --- Foundry build + tests (if a Foundry project) -----------------------------
 if have forge && [ -f "$TARGET/foundry.toml" ]; then
   log "Foundry project detected — building & testing..."
@@ -70,12 +111,16 @@ fi
   echo "## Artifacts"
   for f in "$OUT"/*; do
     [ "$f" = "$OUT/INDEX.md" ] && continue
-    echo "- \`$(basename "$f")\`"
+    if [ -d "$f" ]; then
+      echo "- \`$(basename "$f")/\` ($(find "$f" -type f | wc -l) files)"
+    else
+      echo "- \`$(basename "$f")\`"
+    fi
   done
   echo
   echo "## Next steps"
   echo "1. Triage every finding: true positive / false positive / needs manual check."
-  echo "2. Map each real signal to a checklist category (methodology/checklist.md)."
+  echo "2. Map each real signal to a checklist item ID (methodology/checklist.md) and record it in the coverage matrix."
   echo "3. Proceed to Phase 4 manual review; the tools covered the known patterns only."
 } > "$OUT/INDEX.md"
 

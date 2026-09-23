@@ -1,0 +1,26 @@
+{
+  "name": "Cyfrin / Solodit aggregated smart-contract audit checklist",
+  "source_repo": "https://github.com/Cyfrin/audit-checklist",
+  "source_file": "https://raw.githubusercontent.com/Cyfrin/audit-checklist/main/checklist.json",
+  "hosted_at": "https://solodit.cyfrin.io/checklist",
+  "retrieved_at": "2026-09-23",
+  "sha256_of_original_download": "f33ad4227e866f97372b291eaa88951c52d72a241aca51da5ca3038680168cce",
+  "sha256_of_vendored_file": "3f93f0728bf306ad5857301c35804b934e2bd7f5df95fbcd97aec46e764b25ac",
+  "item_count": 370,
+  "top_level_categories": [
+    "Attacker's Mindset",
+    "Basics",
+    "Centralization Risk",
+    "Defi",
+    "External Call",
+    "Hash / Merkle Tree",
+    "Heuristics",
+    "Integrations",
+    "Low Level",
+    "Multi-chain/Cross-chain",
+    "Signature",
+    "Timelock",
+    "Token"
+  ],
+  "license_note": "No LICENSE file is published in the upstream repository as of the retrieval date. The content is vendored verbatim for attribution-preserving use inside SmartCon; Cyfrin and the community contributors credited in the upstream readme own the content. Refresh with: python3 tools/build-checklist.py --fetch"
+}

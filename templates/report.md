@@ -10,6 +10,8 @@ impact (funds stolen/frozen, invariant broken) and who can trigger it.
 **<Critical | High | Medium | Low>** — justify using
 [severity-classification.md](../methodology/severity-classification.md).
 State the impact and the likelihood/preconditions explicitly.
+Verification (Phase 5b, [verify.md](verify.md)): **CONFIRMED** by <verifier> on <date>
+(or DOWNGRADED from X, with the reason).
 
 ## Affected code
 - **Contract / file:** `path/Contract.sol`
@@ -23,7 +25,9 @@ State the impact and the likelihood/preconditions explicitly.
 
 ## Vulnerability details
 Explain the root cause. Which assumption/invariant is violated and why. Reference the
-relevant [knowledge-base](../knowledge-base/vulnerabilities/) class.
+relevant [knowledge-base](../knowledge-base/vulnerabilities/) class and the checklist
+items that surfaced it, e.g. `SC-REEN-1`, `SOL-EC-13`
+(see [checklist-reference.md](../methodology/checklist-reference.md)).
 
 ## Exploit scenario (step by step)
 1. Preconditions (state, actors, capital — note if a flash loan supplies capital).
@@ -53,5 +57,8 @@ Concrete remediation with corrected code. Explain *why* it closes the hole.
 ```
 
 ## References
+- Checklist items: `SC-…`, `SOL-…` (the Solodit references behind each ID point at
+  paid findings of the same class).
+- Similar incidents: link the relevant [case studies](../knowledge-base/case-studies/README.md).
 - Related known bugs / CVEs / prior findings.
 - Links to the affected transactions or contest scope.

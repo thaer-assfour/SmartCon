@@ -85,5 +85,10 @@ function withdraw() external nonReentrant {
 - Inherit OpenZeppelin `ReentrancyGuard` and mark state-changing functions `nonReentrant`.
 
 ## References
+- Checklist items: `SC-REEN-1` (external call before state update), `SC-REEN-4`
+  (`receive()` callback window), `SOL-EC-13` (checks-effects-interactions);
+  see [checklist-reference.md](../../methodology/checklist-reference.md).
+- Similar incidents: [Rari Capital / Fei Fuse, 2022-04-30](../../knowledge-base/case-studies/2022-04-30-rari-fei-fuse-reentrancy.md)
+  (the same inverted ordering in a Compound fork's `borrow`).
 - [Reentrancy knowledge base](../../knowledge-base/vulnerabilities/reentrancy.md)
 - Slither confirmed this automatically (`reentrancy-eth`) — see `slither-report.txt`.
