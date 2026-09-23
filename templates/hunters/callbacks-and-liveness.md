@@ -127,7 +127,7 @@ Return exactly these four sections, in this order, as Markdown, with nothing bef
 | # | Hypothesis (attacker story, one or two sentences) | Checklist item(s) | Entry point (`Contract.function`, `file:line`) | Invariant broken | Preconditions | Rough impact | Confidence | How to prove (PoC sketch) |
 |---|---|---|---|---|---|---|---|---|
 
-Rank by impact × confidence (`high` / `medium` / `low`). No hypothesis without a `file:line`. A finding you could not fully confirm still goes here at `low` confidence; the orchestrator decides what reaches Phase 5.
+Rank by impact × confidence (`high` / `medium` / `low`). No hypothesis without a `file:line`. A finding you could not fully confirm still goes here at `low` confidence; the orchestrator decides what reaches Phase 5. If you have none, keep the header row and write `None.` under the table with one sentence on why your categories do not apply. A bug that clearly belongs to another cluster goes under **Leads for other hunters**, not here, unless one of *your* items is what reveals it; the orchestrator deduplicates by root cause, so do not restate another cluster's finding to be safe.
 
 ### Coverage
 
@@ -142,4 +142,4 @@ What you did not get to and why (time, missing source, out of scope). An empty l
 
 ### Leads for other hunters
 
-Anything you noticed that belongs to another cluster: `<cluster slug>`: `<item ID>`: one line. Leave empty if none.
+Anything you noticed that belongs to another cluster, one line each in the form `<cluster slug>`: `<item ID>`: what and where (`file:line`). Use these slugs exactly: `accounting-and-math` (Accounting & math), `tokens-and-oracles` (Tokens & price sources), `privilege-and-upgrade` (Privilege, upgrades, governance & signatures), `economics-and-ordering` (Atomic capital, ordering & randomness), `boundaries-and-inputs` (Inputs, cross-chain boundaries & hygiene). Write `None.` if there are none.

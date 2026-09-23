@@ -595,7 +595,11 @@ def render_hunter_md(m: dict, h: dict) -> str:
     o.append("| # | Hypothesis (attacker story, one or two sentences) | Checklist item(s) | Entry point (`Contract.function`, `file:line`) | Invariant broken | Preconditions | Rough impact | Confidence | How to prove (PoC sketch) |")
     o.append("|---|---|---|---|---|---|---|---|---|")
     o.append("")
-    o.append("Rank by impact × confidence (`high` / `medium` / `low`). No hypothesis without a `file:line`. A finding you could not fully confirm still goes here at `low` confidence; the orchestrator decides what reaches Phase 5.\n")
+    o.append(
+        "Rank by impact × confidence (`high` / `medium` / `low`). No hypothesis without a `file:line`. A finding you could not fully confirm still goes here at `low` confidence; the orchestrator decides what reaches Phase 5. "
+        "If you have none, keep the header row and write `None.` under the table with one sentence on why your categories do not apply. "
+        "A bug that clearly belongs to another cluster goes under **Leads for other hunters**, not here, unless one of *your* items is what reveals it; the orchestrator deduplicates by root cause, so do not restate another cluster's finding to be safe.\n"
+    )
     o.append("### Coverage\n")
     o.append("| ID | Contract(s) | Answer (`Y` present → hypothesis above / `N` checked, absent / `?` open lead / `N.A.` not applicable) | Evidence (`file:line` or a one-line reason) |")
     o.append("|---|---|---|---|")
@@ -604,7 +608,10 @@ def render_hunter_md(m: dict, h: dict) -> str:
     o.append("### Not covered\n")
     o.append("What you did not get to and why (time, missing source, out of scope). An empty list means you claim full coverage of your categories.\n")
     o.append("### Leads for other hunters\n")
-    o.append("Anything you noticed that belongs to another cluster: `<cluster slug>`: `<item ID>`: one line. Leave empty if none.\n")
+    o.append(
+        "Anything you noticed that belongs to another cluster, one line each in the form `<cluster slug>`: `<item ID>`: what and where (`file:line`). "
+        "Use these slugs exactly: " + ", ".join(f"`{x['slug']}` ({x['name']})" for x in others) + ". Write `None.` if there are none.\n"
+    )
     return "\n".join(o)
 
 
