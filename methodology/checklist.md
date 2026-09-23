@@ -26,23 +26,23 @@ case studies that cite it). Track coverage per engagement with
 |---|----------|-----:|---------:|-------------:|----------------|
 | 1 | [Reentrancy](#1-reentrancy) | 5 | 8 | 3 | [reentrancy.md](../knowledge-base/vulnerabilities/reentrancy.md) |
 | 2 | [Access Control](#2-access-control) | 6 | 22 | 2 | [access-control.md](../knowledge-base/vulnerabilities/access-control.md) |
-| 3 | [Arithmetic & Precision](#3-arithmetic--precision) | 7 | 20 | 2 | [arithmetic-and-precision.md](../knowledge-base/vulnerabilities/arithmetic-and-precision.md) |
+| 3 | [Arithmetic & Precision](#3-arithmetic--precision) | 7 | 20 | 3 | [arithmetic-and-precision.md](../knowledge-base/vulnerabilities/arithmetic-and-precision.md) |
 | 4 | [Oracle & Price Manipulation](#4-oracle--price-manipulation) | 6 | 22 | 5 | [oracle-and-price-manipulation.md](../knowledge-base/vulnerabilities/oracle-and-price-manipulation.md) |
 | 5 | [Flash Loans & Atomic Composition](#5-flash-loans--atomic-composition) | 3 | 6 | 5 | [flash-loans.md](../knowledge-base/vulnerabilities/flash-loans.md) |
-| 6 | [DeFi Business Logic](#6-defi-business-logic) | 7 | 40 | 3 | [defi-logic.md](../knowledge-base/vulnerabilities/defi-logic.md) |
+| 6 | [DeFi Business Logic](#6-defi-business-logic) | 7 | 40 | 4 | [defi-logic.md](../knowledge-base/vulnerabilities/defi-logic.md) |
 | 7 | [Upgradeability & Proxies](#7-upgradeability--proxies) | 6 | 12 | 1 | [upgradeability.md](../knowledge-base/vulnerabilities/upgradeability.md) |
 | 8 | [Signatures, Proofs & Replay](#8-signatures-proofs--replay) | 5 | 13 | 1 | [signatures.md](../knowledge-base/vulnerabilities/signatures.md) |
 | 9 | [Denial of Service](#9-denial-of-service) | 5 | 15 | 1 | [denial-of-service.md](../knowledge-base/vulnerabilities/denial-of-service.md) |
 | 10 | [Token Integration Quirks](#10-token-integration-quirks) | 7 | 41 | 2 | [token-integration.md](../knowledge-base/vulnerabilities/token-integration.md) |
 | 11 | [Front-running / MEV](#11-front-running--mev) | 5 | 18 | 1 | [front-running-mev.md](../knowledge-base/vulnerabilities/front-running-mev.md) |
-| 12 | [General Solidity Hygiene](#12-general-solidity-hygiene) | 6 | 17 | 0 | — |
+| 12 | [General Solidity Hygiene](#12-general-solidity-hygiene) | 6 | 17 | 1 | — |
 | 13 | [Weak Randomness](#13-weak-randomness) | 3 | 5 | 0 | [randomness.md](../knowledge-base/vulnerabilities/randomness.md) |
 | 14 | [Governance](#14-governance) | 5 | 2 | 2 | [governance.md](../knowledge-base/vulnerabilities/governance.md) |
 | 15 | [Bridges & Cross-Chain](#15-bridges--cross-chain) | 6 | 29 | 0 | [bridges-cross-chain.md](../knowledge-base/vulnerabilities/bridges-cross-chain.md) |
 | 16 | [Low-Level Calls & Return Data](#16-low-level-calls--return-data) | 4 | 15 | 1 | [low-level-calls.md](../knowledge-base/vulnerabilities/low-level-calls.md) |
 | 17 | [Input Validation & Uninitialized State](#17-input-validation--uninitialized-state) | 7 | 18 | 0 | [input-validation.md](../knowledge-base/vulnerabilities/input-validation.md) |
 | A | [Version-specific issues (compiler and library bugs)](#appendix-a-version-specific-issues-compiler-and-library-bugs) | 0 | 67 | 0 | — |
-| | **Total** | **93** | **370** | **16** | |
+| | **Total** | **93** | **370** | **17** | |
 
 ---
 
@@ -146,7 +146,7 @@ Notes: [`knowledge-base/vulnerabilities/access-control.md`](../knowledge-base/vu
 
 ## 3. Arithmetic & Precision
 
-Notes: [`knowledge-base/vulnerabilities/arithmetic-and-precision.md`](../knowledge-base/vulnerabilities/arithmetic-and-precision.md) · Case studies: [2023-04-15 Hundred Finance (~$7M)](../knowledge-base/case-studies/2023-04-15-hundred-finance-empty-market-exchange-rate.md), [2022-03-20 Umbrella Network (~$700K)](../knowledge-base/case-studies/2022-03-20-umbrella-network-staking-underflow.md)
+Notes: [`knowledge-base/vulnerabilities/arithmetic-and-precision.md`](../knowledge-base/vulnerabilities/arithmetic-and-precision.md) · Case studies: [2023-04-15 Hundred Finance (~$7M)](../knowledge-base/case-studies/2023-04-15-hundred-finance-empty-market-exchange-rate.md), [2022-03-20 Umbrella Network (~$700K)](../knowledge-base/case-studies/2022-03-20-umbrella-network-staking-underflow.md), [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 **Core**
 
@@ -288,7 +288,7 @@ Notes: [`knowledge-base/vulnerabilities/flash-loans.md`](../knowledge-base/vulne
 
 ## 6. DeFi Business Logic
 
-Notes: [`knowledge-base/vulnerabilities/defi-logic.md`](../knowledge-base/vulnerabilities/defi-logic.md) · Case studies: [2023-04-15 Hundred Finance (~$7M)](../knowledge-base/case-studies/2023-04-15-hundred-finance-empty-market-exchange-rate.md), [2023-03-13 Euler Finance (~$197M)](../knowledge-base/case-studies/2023-03-13-euler-finance-donate-to-reserves.md), [2023-02-17 Platypus Finance (~$8.5M)](../knowledge-base/case-studies/2023-02-17-platypus-emergency-withdraw-solvency.md)
+Notes: [`knowledge-base/vulnerabilities/defi-logic.md`](../knowledge-base/vulnerabilities/defi-logic.md) · Case studies: [2023-04-15 Hundred Finance (~$7M)](../knowledge-base/case-studies/2023-04-15-hundred-finance-empty-market-exchange-rate.md), [2023-03-13 Euler Finance (~$197M)](../knowledge-base/case-studies/2023-03-13-euler-finance-donate-to-reserves.md), [2023-02-17 Platypus Finance (~$8.5M)](../knowledge-base/case-studies/2023-02-17-platypus-emergency-withdraw-solvency.md), [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 **Core**
 
@@ -635,6 +635,8 @@ Notes: [`knowledge-base/vulnerabilities/front-running-mev.md`](../knowledge-base
 - [ ] **[SOL-Integrations-Uniswap-8](checklist-reference.md#sol-integrations-uniswap-8)** Is the slippage parameter enforced at the last step before transferring funds to users?
 
 ## 12. General Solidity Hygiene
+
+Case studies: [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 **Core**
 

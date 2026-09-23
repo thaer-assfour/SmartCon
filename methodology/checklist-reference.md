@@ -1129,6 +1129,8 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/defi-
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/defi-logic.md`](../knowledge-base/vulnerabilities/defi-logic.md)
 
+**Cited by.** [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
+
 ### SC-DEFI-3
 
 **Question.** Staking/rewards: can rewards be double-claimed, claimed after unstake, or diluted/inflated via deposit timing?
@@ -1222,6 +1224,8 @@ Source: Cyfrin / Solodit · upstream path: *Defi › AMM/Swap*
 
 **Remediation.** Review the differences. Utilize tools such as contract-diff.xyz to compare and identify the origin of code snippets.
 
+**Cited by.** [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
+
 ### SOL-Defi-AS-5
 
 **Question.** Are there rounding issues in product constant formulas?
@@ -1231,6 +1235,8 @@ Source: Cyfrin / Solodit · upstream path: *Defi › AMM/Swap*
 **Description.** Rounding issues in the formulas can lead to inaccuracies or imbalances in token swaps and liquidity provisions.
 
 **Remediation.** Review the mathematical operations in the AMM's formulas, ensuring they handle rounding appropriately without introducing vulnerabilities.
+
+**Cited by.** [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 ### SOL-Defi-General-2
 
@@ -1487,7 +1493,7 @@ Source: Cyfrin / Solodit · upstream path: *Heuristics*
 **References.**
 - <https://github.com/OpenCoreCH/smart-contract-auditing-heuristics#code-asymmetries>
 
-**Cited by.** [2023-03-13 Euler Finance (~$197M)](../knowledge-base/case-studies/2023-03-13-euler-finance-donate-to-reserves.md); [2023-02-17 Platypus Finance (~$8.5M)](../knowledge-base/case-studies/2023-02-17-platypus-emergency-withdraw-solvency.md)
+**Cited by.** [2023-03-13 Euler Finance (~$197M)](../knowledge-base/case-studies/2023-03-13-euler-finance-donate-to-reserves.md); [2023-02-17 Platypus Finance (~$8.5M)](../knowledge-base/case-studies/2023-02-17-platypus-emergency-withdraw-solvency.md); [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 ### SOL-Integrations-AC-2
 
@@ -2990,6 +2996,8 @@ SmartCon core question · added from: Cyfrin version-issue items
 **Question.** Forked or copied code: were constants, fee denominators and formulas diffed line by line against the upstream (Uniswap, Compound, OpenZeppelin) they came from?
 
 SmartCon core question · added from: case study 2021-04-28 Uranium Finance
+
+**Cited by.** [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studies/2021-04-28-uranium-finance-k-constant-typo.md)
 
 ### SOL-Basics-AL-1
 
