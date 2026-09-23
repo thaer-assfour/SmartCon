@@ -8,7 +8,7 @@
 - **Vulnerability class:** [Low-Level Calls & Return Data](../vulnerabilities/low-level-calls.md)
 - **Checklist categories:** signatures, token-integration, low-level-calls
 - **Checklist items:** SC-TOKEN-7, SC-LL-4, SC-SIG-4, SOL-Token-FE-11, SOL-LL-2
-- **Root cause in one sentence:** the router called `permit()` on an attacker-supplied token's `underlying()`, and when that underlying is WETH — which has no `permit` — WETH's payable fallback silently accepts the call and returns success, so the router proceeded to `safeTransferFrom` a victim's pre-existing WETH allowance with no signature ever verified.
+- **Root cause in one sentence:** the router called `permit()` on an attacker-supplied token's `underlying()`, and when that underlying is WETH (which has no `permit`), WETH's payable fallback silently accepts the call and returns success, so the router proceeded to `safeTransferFrom` a victim's pre-existing WETH allowance with no signature ever verified.
 - **Attack tx:** https://etherscan.io/tx/0xe50ed602bd916fc304d53c4fed236698b71691a95774ff0aeeb74b699c6227f7
 - **Reproduction:** https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-01/Anyswap_exp.sol
 
@@ -18,7 +18,7 @@ entry point that lets a user authorise a pull of the *underlying* token with an
 EIP-2612 `permit` signature instead of a prior `approve`. The intended invariant:
 funds move out of an account only if that account signed a valid `permit` for this
 router. The bug is that the router never confirmed the signature actually did
-anything — it assumed a successful `permit()` call meant a verified authorisation.
+anything: it assumed a successful `permit()` call meant a verified authorisation.
 
 ## The vulnerability
 The router takes `token` from the caller, reads its `underlying()`, calls `permit`
@@ -49,7 +49,7 @@ anyone, sent to the attacker's `token` contract, which forwards it out.
 1. Deploy a contract that satisfies the `AnyswapV1ERC20` shape the router calls:
    `underlying()` returns WETH, and `burn`/`depositVault` are no-op stubs.
 2. Call `anySwapOutUnderlyingWithPermit(victim, attackerToken, attacker, amount,
-   deadline, 0, "0x", "0x", chainId)` — the `v/r/s` are garbage; they are never used.
+   deadline, 0, "0x", "0x", chainId)`; the `v/r/s` are garbage and are never used.
 3. The router calls `WETH.permit(...)`; WETH's fallback swallows it and returns
    success. No signature is verified.
 4. The router `safeTransferFrom`s `amount` WETH from the victim (who had an existing
@@ -85,7 +85,7 @@ reimbursed affected users. The class did **not** die: on 2025-07-29 the same
 `AnyswapV4Router` at `0x6b7a87899490EcE95443e979cA9485CBE7E71522` was hit again for
 200 WETH (attack tx `0xae79fdcfd7c36ed654d11b352b495340bd3cc47d0849c35ac6ffa1e4859098ec`,
 PoC `src/test/2025-07/AnyswapWETHPermit_exp.sol`) against accounts that still held a
-stale max approval — the same phantom-permit bug, three and a half years later.
+stale max approval: the same phantom-permit bug, three and a half years later.
 
 ## Lessons for the checklist
 - **SC-TOKEN-7** (phantom functions: calling `permit`/optional functions on tokens
@@ -96,12 +96,12 @@ stale max approval — the same phantom-permit bug, three and a half years later
   silent-success fallback.
 - **SOL-Token-FE-11** (token is ERC2612/permit): asking "is the token guaranteed to
   implement EIP-2612?" exposes the unchecked assumption for arbitrary `underlying`s.
-- **SC-SIG-4** (cross-chain/instance replay): a partial fit — the deeper failure is
-  that the signature is never validated at all, which asking "is the signature result
-  actually checked?" surfaces.
+- **SC-SIG-4** (cross-chain/instance replay): a partial fit, since the deeper failure
+  is that the signature is never validated at all, which asking "is the signature
+  result actually checked?" surfaces.
 - Proposed new checklist question: *"When we call `permit` (or any optional token
-  method), do we verify the token implements it — via `code.length` plus a
-  nonce/allowance delta — rather than trusting that the call did not revert?"*
+  method), do we verify the token implements it (via `code.length` plus a
+  nonce/allowance delta) rather than trusting that the call did not revert?"*
 
 ## References
 - Post-mortem: Zengo, "Without Permit: Multichain's exploit explained"; Dedaub,

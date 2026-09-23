@@ -1035,7 +1035,7 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/flash
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/flash-loans.md`](../knowledge-base/vulnerabilities/flash-loans.md)
 
-**Cited by.** [2021-05-19 PancakeBunny (~$45M)](../knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md)
+**Cited by.** [2022-04-16 Beanstalk Farms (~$182M)](../knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md); [2021-05-19 PancakeBunny (~$45M)](../knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md)
 
 ### SC-FLASH-3
 
@@ -1962,11 +1962,15 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/denia
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/denial-of-service.md`](../knowledge-base/vulnerabilities/denial-of-service.md)
 
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
+
 ### SC-DOS-3
 
 **Question.** Can an attacker grief by forcing gas costs, filling a queue, or locking funds?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/denial-of-service.md`](../knowledge-base/vulnerabilities/denial-of-service.md)
+
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
 
 ### SC-DOS-4
 
@@ -1980,6 +1984,8 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/denia
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/denial-of-service.md`](../knowledge-base/vulnerabilities/denial-of-service.md) · added from: case study 2022-04-23 Akutar NFT
 
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
+
 ### SOL-AM-DOSA-1
 
 **Question.** Is the withdrawal pattern followed to prevent denial of service?
@@ -1992,6 +1998,8 @@ Source: Cyfrin / Solodit · upstream path: *Attacker's Mindset › Denial-Of-Ser
 
 **References.**
 - <https://solodit.xyz/issues/m-06-denial-of-service-contract-owner-could-block-users-from-withdrawing-their-strike-code4rena-putty-putty-contest-git>
+
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
 
 ### SOL-AM-DOSA-2
 
@@ -2123,6 +2131,8 @@ Source: Cyfrin / Solodit · upstream path: *Basics › Array / Loop*
 
 **Remediation.** Make sure the last transfer handles all residual.
 
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
+
 ### SOL-Basics-Payment-1
 
 **Question.** Is it possible for the receiver to revert?
@@ -2132,6 +2142,8 @@ Source: Cyfrin / Solodit · upstream path: *Basics › Payment*
 **Description.** There are cases where a receiver contract can deny the transaction. For example, a malicious receiver can have a fallback to revert. If a caller tried to send funds using `transfer` or `send`, the whole transaction will revert. (Meanwhile, `call()` does not revert but returns a boolean)
 
 **Remediation.** Make sure that the receiver can not deny the payment or add a backup handler with a try-catch.
+
+**Cited by.** [2022-04-23 Akutars / Aku Dreams NFT Dutch auction (11,539.5 ETH)](../knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md)
 
 ### SOL-Basics-Payment-5
 
@@ -2671,6 +2683,8 @@ Source: Cyfrin / Solodit · upstream path: *Token › Non-fungible : ERC721/1155
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/front-running-mev.md`](../knowledge-base/vulnerabilities/front-running-mev.md)
 
+**Cited by.** [2023-05-29 Jimbo's Protocol (~4,090 ETH)](../knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md)
+
 ### SC-MEV-2
 
 **Question.** Is there a commit-reveal or slippage guard where ordering matters?
@@ -2689,11 +2703,15 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/front
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/front-running-mev.md`](../knowledge-base/vulnerabilities/front-running-mev.md)
 
+**Cited by.** [2023-05-29 Jimbo's Protocol (~4,090 ETH)](../knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md)
+
 ### SC-MEV-5
 
 **Question.** Do protocol-owned or automated operations (rebalances, fee conversions, liquidity shifts, harvests) execute swaps without slippage or price-band bounds?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/front-running-mev.md`](../knowledge-base/vulnerabilities/front-running-mev.md) · added from: case study 2023-05-29 Jimbo's Protocol
+
+**Cited by.** [2023-05-29 Jimbo's Protocol (~4,090 ETH)](../knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md)
 
 ### SOL-AM-FrA-1
 
@@ -2788,6 +2806,8 @@ Source: Cyfrin / Solodit · upstream path: *Attacker's Mindset › Sandwich Atta
 - <https://solodit.xyz/issues/h-12-sandwich-attack-to-accruepremiumandexpireprotections-sherlock-carapace-carapace-git>
 - <https://solodit.xyz/issues/h-1-adversary-can-sandwich-oracle-updates-to-exploit-vault-sherlock-olympus-olympus-update-git>
 
+**Cited by.** [2023-05-29 Jimbo's Protocol (~4,090 ETH)](../knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md)
+
 ### SOL-Basics-BR-1
 
 **Question.** Does the protocol implement a factory pattern using the CREATE opcode?
@@ -2868,6 +2888,8 @@ Source: Cyfrin / Solodit · upstream path: *Defi › AMM/Swap*
 
 **References.**
 - <https://blog.chain.link/guide-to-sandwich-attacks/>
+
+**Cited by.** [2023-05-29 Jimbo's Protocol (~4,090 ETH)](../knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md)
 
 ### SOL-Defi-AS-13
 
@@ -3234,17 +3256,23 @@ Source: Cyfrin / Solodit · upstream path: *Integrations › Chainlink › VRF*
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/governance.md`](../knowledge-base/vulnerabilities/governance.md)
 
+**Cited by.** [2022-04-16 Beanstalk Farms (~$182M)](../knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md)
+
 ### SC-GOV-2
 
 **Question.** Is there a **timelock** between a proposal passing and executing?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/governance.md`](../knowledge-base/vulnerabilities/governance.md)
 
+**Cited by.** [2022-04-16 Beanstalk Farms (~$182M)](../knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md)
+
 ### SC-GOV-3
 
 **Question.** Can a flash loan / large holder reach quorum atomically?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/governance.md`](../knowledge-base/vulnerabilities/governance.md)
+
+**Cited by.** [2022-04-16 Beanstalk Farms (~$182M)](../knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md)
 
 ### SC-GOV-4
 
@@ -3284,6 +3312,8 @@ Source: Cyfrin / Solodit · upstream path: *Timelock*
 **Description.** Immediate changes in the protocol can affect the users.
 
 **Remediation.** Implement timelocks for important changes, allowing users adequate time to respond to proposed alterations.
+
+**Cited by.** [2022-04-16 Beanstalk Farms (~$182M)](../knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md)
 
 ## 15. Bridges & Cross-Chain
 

@@ -8,7 +8,7 @@
 - **Vulnerability class:** [Token Integration Quirks](../vulnerabilities/token-integration.md)
 - **Checklist categories:** token-integration, reentrancy
 - **Checklist items:** SC-TOKEN-4, SC-REEN-4, SC-REEN-1, SOL-Token-FE-7, SOL-EC-13
-- **Root cause in one sentence:** Gnosis bridge tokens are ERC-677 (`transferAndCall`) and fire an `onTokenTransfer` hook on the recipient, so the Compound-fork `borrow` — which transfers the asset out before writing the debt — handed the attacker a reentrancy window on a code path that is safe with plain ERC-20s.
+- **Root cause in one sentence:** Gnosis bridge tokens are ERC-677 (`transferAndCall`) and fire an `onTokenTransfer` hook on the recipient, so the Compound-fork `borrow`, which transfers the asset out before writing the debt, handed the attacker a reentrancy window on a code path that is safe with plain ERC-20s.
 - **Attack tx:** https://gnosisscan.io/tx/0x534b84f657883ddc1b66a314e8b392feb35024afdec61dfe8e7c510cfac1a098
 - **Reproduction:** https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/HundredFinance_exp.sol
 
@@ -17,7 +17,7 @@ Hundred Finance is a Compound v2 fork. On Gnosis Chain, "native" assets arrive
 through the official Omnibridge, which issues **ERC-677** tokens: a superset of
 ERC-20 whose `transfer`/`transferAndCall` invoke `onTokenTransfer(from, value, data)`
 on the recipient if it is a contract. The protocol invariant is the standard
-Compound one — total borrow value must stay within the collateral factor — enforced
+Compound one, total borrow value must stay within the collateral factor, enforced
 by the comptroller on each `borrow`. Compound's own reasoning that `borrowFresh` is
 safe rests on the assumption that `doTransferOut` is an *inert* ERC-20 transfer that
 yields no control. On Gnosis that assumption does not hold.

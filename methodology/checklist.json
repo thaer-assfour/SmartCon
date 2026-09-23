@@ -1326,6 +1326,7 @@
         }
       ],
       "case_studies": [
+        "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md",
         "knowledge-base/case-studies/2023-02-10-dforce-read-only-reentrancy.md",
         "knowledge-base/case-studies/2021-10-27-cream-finance-yusd-price-manipulation.md",
         "knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md",
@@ -1355,6 +1356,7 @@
           "question": "Are governance votes / share prices / collateral ratios read at a point an attacker can inflate atomically?",
           "source": "smartcon",
           "cited_by": [
+            "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md",
             "knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md"
           ]
         },
@@ -1459,6 +1461,7 @@
       ],
       "case_studies": [
         "knowledge-base/case-studies/2022-04-30-rari-fei-fuse-reentrancy.md",
+        "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md",
         "knowledge-base/case-studies/2021-10-27-cream-finance-yusd-price-manipulation.md",
         "knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md",
         "knowledge-base/case-studies/2020-10-26-harvest-finance-curve-pool-manipulation.md"
@@ -2586,13 +2589,17 @@
           "id": "SC-DOS-2",
           "question": "Does a single failing external call (e.g. one recipient's transfer reverting) block a whole batch / the whole protocol? (push vs. pull payments)",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SC-DOS-3",
           "question": "Can an attacker grief by forcing gas costs, filling a queue, or locking funds?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SC-DOS-4",
@@ -2605,7 +2612,9 @@
           "question": "Can a `require` in a refund / claim / settlement path be made permanently false (counter mismatch, one reverting recipient), locking every user's funds?",
           "added_from": "case study 2022-04-23 Akutar NFT",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SOL-AM-DOSA-1",
@@ -2621,7 +2630,9 @@
             "https://solodit.xyz/issues/m-06-denial-of-service-contract-owner-could-block-users-from-withdrawing-their-strike-code4rena-putty-putty-contest-git"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SOL-AM-DOSA-2",
@@ -2783,7 +2794,9 @@
           "remediation": "Make sure the last transfer handles all residual.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SOL-Basics-Payment-1",
@@ -2797,7 +2810,9 @@
           "remediation": "Make sure that the receiver can not deny the payment or add a backup handler with a try-catch.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+          ]
         },
         {
           "id": "SOL-Basics-Payment-5",
@@ -2845,7 +2860,9 @@
           "cited_by": []
         }
       ],
-      "case_studies": []
+      "case_studies": [
+        "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md"
+      ]
     },
     {
       "number": 10,
@@ -3530,7 +3547,9 @@
           "id": "SC-MEV-1",
           "question": "Can a pending tx be sandwiched for profit at the user's expense?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+          ]
         },
         {
           "id": "SC-MEV-2",
@@ -3548,14 +3567,18 @@
           "id": "SC-MEV-4",
           "question": "Are `minAmountOut` and `deadline` enforced on every swap path?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+          ]
         },
         {
           "id": "SC-MEV-5",
           "question": "Do protocol-owned or automated operations (rebalances, fee conversions, liquidity shifts, harvests) execute swaps without slippage or price-band bounds?",
           "added_from": "case study 2023-05-29 Jimbo's Protocol",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+          ]
         },
         {
           "id": "SOL-AM-FrA-1",
@@ -3670,7 +3693,9 @@
             "https://solodit.xyz/issues/h-1-adversary-can-sandwich-oracle-updates-to-exploit-vault-sherlock-olympus-olympus-update-git"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+          ]
         },
         {
           "id": "SOL-Basics-BR-1",
@@ -3770,7 +3795,9 @@
             "https://blog.chain.link/guide-to-sandwich-attacks/"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+          ]
         },
         {
           "id": "SOL-Defi-AS-13",
@@ -3851,7 +3878,9 @@
           "cited_by": []
         }
       ],
-      "case_studies": []
+      "case_studies": [
+        "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md"
+      ]
     },
     {
       "number": 12,
@@ -4258,19 +4287,25 @@
           "id": "SC-GOV-1",
           "question": "Is voting power snapshotted at a **past block**, not read from current balance?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md"
+          ]
         },
         {
           "id": "SC-GOV-2",
           "question": "Is there a **timelock** between a proposal passing and executing?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md"
+          ]
         },
         {
           "id": "SC-GOV-3",
           "question": "Can a flash loan / large holder reach quorum atomically?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md"
+          ]
         },
         {
           "id": "SC-GOV-4",
@@ -4316,11 +4351,14 @@
           "remediation": "Implement timelocks for important changes, allowing users adequate time to respond to proposed alterations.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md"
+          ]
         }
       ],
       "case_studies": [
-        "knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md"
+        "knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md",
+        "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md"
       ]
     },
     {
@@ -6472,6 +6510,27 @@
   ],
   "case_studies": [
     {
+      "file": "knowledge-base/case-studies/2023-05-29-jimbos-protocol-unprotected-rebalance.md",
+      "title": "Jimbo's Protocol — Unprotected Liquidity Rebalance (`shift`)",
+      "date": "2023-05-29",
+      "protocol": "Jimbo's Protocol (JIMBO), a Trader Joe v2 (Liquidity Book) floor-price token",
+      "chain": "Arbitrum",
+      "loss": "~4,090 ETH (~$7.5M; DeFiHackLabs records ~$8M)",
+      "categories": [
+        "front-running-mev",
+        "oracle-and-price-manipulation"
+      ],
+      "items": [
+        "SC-MEV-5",
+        "SC-MEV-1",
+        "SC-MEV-4",
+        "SOL-AM-SandwichAttack-1",
+        "SOL-Defi-AS-11"
+      ],
+      "attack_tx": "https://arbiscan.io/tx/0xf9baf8cee8973cf9700ae1b1f41c625d7a2abdbcbc222582d24a8f2f790d0b5a",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-05/Jimbo_exp.sol"
+    },
+    {
       "file": "knowledge-base/case-studies/2023-04-15-hundred-finance-empty-market-exchange-rate.md",
       "title": "Hundred Finance — Empty-Market Exchange-Rate Inflation and Redeem Rounding",
       "date": "2023-04-15",
@@ -6596,6 +6655,48 @@
       ],
       "attack_tx": "https://etherscan.io/tx/0xab486012f21be741c9e674ffda227e30518e8a1e37a5f1d58d0b0d41f6e76530",
       "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Rari_exp.sol"
+    },
+    {
+      "file": "knowledge-base/case-studies/2022-04-23-akutar-nft-refund-dos-and-locked-funds.md",
+      "title": "Akutars (Aku Dreams) — Refund DoS and Permanently Locked Auction Proceeds",
+      "date": "2022-04-23",
+      "protocol": "Akutars / Aku Dreams NFT Dutch auction",
+      "chain": "Ethereum",
+      "loss": "11,539.5 ETH (~$34M) locked forever, plus a demonstrable griefing DoS of all bidder refunds",
+      "categories": [
+        "denial-of-service"
+      ],
+      "items": [
+        "SC-DOS-2",
+        "SC-DOS-5",
+        "SC-DOS-3",
+        "SOL-AM-DOSA-1",
+        "SOL-Basics-Payment-1",
+        "SOL-Basics-AL-12"
+      ],
+      "attack_tx": "contract at https://etherscan.io/address/0xf42c318dbfbaab0eee040279c6a2588fa01a961d (no drain tx; a whitehat demonstrated the refund DoS, and the proceeds locked themselves by design flaw)",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/AkutarNFT_exp.sol"
+    },
+    {
+      "file": "knowledge-base/case-studies/2022-04-16-beanstalk-flash-loan-governance.md",
+      "title": "Beanstalk Farms — Flash-Loaned Supermajority via emergencyCommit",
+      "date": "2022-04-16",
+      "protocol": "Beanstalk Farms (algorithmic stablecoin, on-chain BIP governance over a Diamond)",
+      "chain": "Ethereum",
+      "loss": "~$182M drained from the protocol (attacker net profit ~$76M / 24,830 ETH)",
+      "categories": [
+        "governance",
+        "flash-loans"
+      ],
+      "items": [
+        "SC-GOV-1",
+        "SC-GOV-2",
+        "SC-GOV-3",
+        "SC-FLASH-2",
+        "SOL-Timelock-1"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0xcd314668aaa9bbfebaf1a0bd2b6553d01dd58899c508d4729fa7311dc5d33ad7 (exploit); https://etherscan.io/tx/0x68cdec0ac76454c3b0f7af0b8a3895db00adf6daaf3b50a99716858c4fa54c6f (BIP-18 proposal)",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-04/Beanstalk_exp.sol"
     },
     {
       "file": "knowledge-base/case-studies/2022-03-20-umbrella-network-staking-underflow.md",

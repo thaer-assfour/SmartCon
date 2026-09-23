@@ -116,7 +116,7 @@ The attacker, self-identifying as "Jacob," returned effectively all recoverable 
 
 ## References
 - Post-mortem: eIP-14 introduced `donateToReserves`; analyses by BlockSec, PeckShield, and
-  Omniscia (audit of the module) — see the tweet thread links in the PoC header.
+  Omniscia (audit of the module); see the tweet thread links in the PoC header.
 - Transaction(s): 0xc310a0affe2169d1f6feec1c63dbc7f7c62a887fa48795d327d4d2da2d6b111d (and sibling
   txs draining WBTC, stETH, USDC markets).
 - Related audits / similar incidents: Euler had multiple audits; the vulnerable line shipped in a

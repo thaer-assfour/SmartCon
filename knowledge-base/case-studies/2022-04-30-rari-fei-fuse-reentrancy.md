@@ -28,7 +28,7 @@ effects. The following is the deployed Fuse/Compound logic (from `CToken.sol`,
 verbatim ordering):
 
 ```solidity
-// borrowFresh, deployed ordering — INTERACTION happens before EFFECTS
+// borrowFresh, deployed ordering: INTERACTION happens before EFFECTS
 doTransferOut(borrower, borrowAmount);                 // (1) sends the asset out
 
 accountBorrows[borrower].principal = vars.accountBorrowsNew;  // (2) debt written AFTER
@@ -76,7 +76,7 @@ Reorder to strict CEI (write debt first) and cap the ETH transfer gas. Compound'
 later `borrowFresh` does exactly this:
 
 ```solidity
-// EFFECTS first — the deployed patch
+// EFFECTS first: the deployed patch
 accountBorrows[borrower].principal = accountBorrowsNew;   // write debt BEFORE sending
 accountBorrows[borrower].interestIndex = borrowIndex;
 totalBorrows = totalBorrowsNew;
