@@ -1,9 +1,12 @@
 # Worked Example — Reentrancy Drain
 
 A complete, runnable demonstration of the SmartCon methodology against a
-deliberately vulnerable contract. It exercises two phases end to end:
+deliberately vulnerable contract. It exercises three phases end to end:
 
 - **Phase 3 — Automated analysis:** Slither flags the reentrancy.
+- **Phase 4 — Manual deep review:** a recorded run of the six parallel
+  [hunter briefs](../../templates/hunters/README.md), merged by root cause, in
+  [`phase4-hunters-run.md`](phase4-hunters-run.md).
 - **Phase 5 — Proof of Concept:** a real EVM (`@ethereumjs/vm`) executes the exploit
   and proves funds are drained.
 

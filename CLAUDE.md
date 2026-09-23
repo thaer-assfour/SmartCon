@@ -80,7 +80,8 @@ run `python3 tools/build-checklist.py`. `--check` must pass before committing.
 ## Worked example to imitate
 
 [`examples/reentrancy-demo/`](examples/reentrancy-demo/) runs Phase 3 (Slither) + Phase 5
-(executed exploit) end to end via `./run.sh`. Use it as the reference shape for new
+(executed exploit) end to end via `./run.sh`, and records a real Phase 4 hunter run with
+its merged result in `phase4-hunters-run.md`. Use it as the reference shape for new
 findings, including the write-up in `finding-01-reentrancy.md`. The case studies under
 [`knowledge-base/case-studies/`](knowledge-base/case-studies/README.md) show, for real
 incidents, which checklist question would have caught the bug; read the matching one
