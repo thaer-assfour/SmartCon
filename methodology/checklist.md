@@ -25,7 +25,7 @@ case studies that cite it). Track coverage per engagement with
 | # | Category | Core | Extended | Case studies | Knowledge base |
 |---|----------|-----:|---------:|-------------:|----------------|
 | 1 | [Reentrancy](#1-reentrancy) | 5 | 8 | 3 | [reentrancy.md](../knowledge-base/vulnerabilities/reentrancy.md) |
-| 2 | [Access Control](#2-access-control) | 6 | 22 | 2 | [access-control.md](../knowledge-base/vulnerabilities/access-control.md) |
+| 2 | [Access Control](#2-access-control) | 6 | 22 | 4 | [access-control.md](../knowledge-base/vulnerabilities/access-control.md) |
 | 3 | [Arithmetic & Precision](#3-arithmetic--precision) | 7 | 20 | 3 | [arithmetic-and-precision.md](../knowledge-base/vulnerabilities/arithmetic-and-precision.md) |
 | 4 | [Oracle & Price Manipulation](#4-oracle--price-manipulation) | 6 | 22 | 5 | [oracle-and-price-manipulation.md](../knowledge-base/vulnerabilities/oracle-and-price-manipulation.md) |
 | 5 | [Flash Loans & Atomic Composition](#5-flash-loans--atomic-composition) | 3 | 6 | 5 | [flash-loans.md](../knowledge-base/vulnerabilities/flash-loans.md) |
@@ -36,13 +36,13 @@ case studies that cite it). Track coverage per engagement with
 | 10 | [Token Integration Quirks](#10-token-integration-quirks) | 7 | 41 | 2 | [token-integration.md](../knowledge-base/vulnerabilities/token-integration.md) |
 | 11 | [Front-running / MEV](#11-front-running--mev) | 5 | 18 | 1 | [front-running-mev.md](../knowledge-base/vulnerabilities/front-running-mev.md) |
 | 12 | [General Solidity Hygiene](#12-general-solidity-hygiene) | 6 | 17 | 1 | — |
-| 13 | [Weak Randomness](#13-weak-randomness) | 3 | 5 | 0 | [randomness.md](../knowledge-base/vulnerabilities/randomness.md) |
+| 13 | [Weak Randomness](#13-weak-randomness) | 3 | 5 | 1 | [randomness.md](../knowledge-base/vulnerabilities/randomness.md) |
 | 14 | [Governance](#14-governance) | 5 | 2 | 2 | [governance.md](../knowledge-base/vulnerabilities/governance.md) |
-| 15 | [Bridges & Cross-Chain](#15-bridges--cross-chain) | 6 | 29 | 0 | [bridges-cross-chain.md](../knowledge-base/vulnerabilities/bridges-cross-chain.md) |
-| 16 | [Low-Level Calls & Return Data](#16-low-level-calls--return-data) | 4 | 15 | 1 | [low-level-calls.md](../knowledge-base/vulnerabilities/low-level-calls.md) |
-| 17 | [Input Validation & Uninitialized State](#17-input-validation--uninitialized-state) | 7 | 18 | 0 | [input-validation.md](../knowledge-base/vulnerabilities/input-validation.md) |
+| 15 | [Bridges & Cross-Chain](#15-bridges--cross-chain) | 6 | 29 | 3 | [bridges-cross-chain.md](../knowledge-base/vulnerabilities/bridges-cross-chain.md) |
+| 16 | [Low-Level Calls & Return Data](#16-low-level-calls--return-data) | 4 | 15 | 2 | [low-level-calls.md](../knowledge-base/vulnerabilities/low-level-calls.md) |
+| 17 | [Input Validation & Uninitialized State](#17-input-validation--uninitialized-state) | 7 | 18 | 3 | [input-validation.md](../knowledge-base/vulnerabilities/input-validation.md) |
 | A | [Version-specific issues (compiler and library bugs)](#appendix-a-version-specific-issues-compiler-and-library-bugs) | 0 | 67 | 0 | — |
-| | **Total** | **93** | **370** | **17** | |
+| | **Total** | **93** | **370** | **22** | |
 
 ---
 
@@ -85,7 +85,7 @@ Notes: [`knowledge-base/vulnerabilities/reentrancy.md`](../knowledge-base/vulner
 
 ## 2. Access Control
 
-Notes: [`knowledge-base/vulnerabilities/access-control.md`](../knowledge-base/vulnerabilities/access-control.md) · Case studies: [2022-07-23 Audius (704 ETH)](../knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md), [2021-09-03 DAO Maker (~$4M)](../knowledge-base/case-studies/2021-09-03-dao-maker-unprotected-init.md)
+Notes: [`knowledge-base/vulnerabilities/access-control.md`](../knowledge-base/vulnerabilities/access-control.md) · Case studies: [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md), [2022-07-23 Audius (704 ETH)](../knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md), [2021-09-03 DAO Maker (~$4M)](../knowledge-base/case-studies/2021-09-03-dao-maker-unprotected-init.md), [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
 
 **Core**
 
@@ -686,7 +686,7 @@ Case studies: [2021-04-28 Uranium Finance (~$50M)](../knowledge-base/case-studie
 
 ## 13. Weak Randomness
 
-Notes: [`knowledge-base/vulnerabilities/randomness.md`](../knowledge-base/vulnerabilities/randomness.md)
+Notes: [`knowledge-base/vulnerabilities/randomness.md`](../knowledge-base/vulnerabilities/randomness.md) · Case studies: [2022-08-24 LuckyTiger NFT mint (small and not precisely documen…)](../knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md)
 
 **Core**
 
@@ -731,7 +731,7 @@ Notes: [`knowledge-base/vulnerabilities/governance.md`](../knowledge-base/vulner
 
 ## 15. Bridges & Cross-Chain
 
-Notes: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md)
+Notes: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md) · Case studies: [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md), [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md), [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
 
 **Core**
 
@@ -787,7 +787,7 @@ Notes: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-ba
 
 ## 16. Low-Level Calls & Return Data
 
-Notes: [`knowledge-base/vulnerabilities/low-level-calls.md`](../knowledge-base/vulnerabilities/low-level-calls.md) · Case studies: [2022-01-18 Multichain / Anyswap `AnyswapV4Router.a… (~$1.4M)](../knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md)
+Notes: [`knowledge-base/vulnerabilities/low-level-calls.md`](../knowledge-base/vulnerabilities/low-level-calls.md) · Case studies: [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md), [2022-01-18 Multichain / Anyswap `AnyswapV4Router.a… (~$1.4M)](../knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md)
 
 **Core**
 
@@ -827,7 +827,7 @@ Notes: [`knowledge-base/vulnerabilities/low-level-calls.md`](../knowledge-base/v
 
 ## 17. Input Validation & Uninitialized State
 
-Notes: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md)
+Notes: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md) · Case studies: [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md), [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md), [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md)
 
 **Core**
 

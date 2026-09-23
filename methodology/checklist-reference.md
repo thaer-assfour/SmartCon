@@ -167,6 +167,8 @@ Source: Cyfrin / Solodit · upstream path: *Token › Non-fungible : ERC721/1155
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/access-control.md`](../knowledge-base/vulnerabilities/access-control.md)
 
+**Cited by.** [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
+
 ### SC-AC-2
 
 **Question.** Any function that *should* be `onlyOwner`/role-gated but is public?
@@ -1874,6 +1876,8 @@ Source: Cyfrin / Solodit · upstream path: *Hash / Merkle Tree*
 
 **Remediation.** Implement checks to handle zero hash values appropriately and prevent potential misuse.
 
+**Cited by.** [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md)
+
 ### SOL-HMT-4
 
 **Question.** What occurs if the same proof is duplicated within the Merkle tree?
@@ -2448,6 +2452,8 @@ Source: Cyfrin / Solodit · upstream path: *Token › Fungible : ERC20*
 **Description.** Not all ERC20 tokens are compliant to the EIP20 standard. Some do not return boolean flag, some do not revert on failure.
 
 **Remediation.** Use OpenZeppelin's SafeERC20 where the safeTransfer and safeTransferFrom functions handle the return value check as well as non-standard-compliant tokens.
+
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md)
 
 ### SOL-Token-FE-2
 
@@ -3188,17 +3194,23 @@ Source: Cyfrin / Solodit · upstream path: *Heuristics*
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/randomness.md`](../knowledge-base/vulnerabilities/randomness.md)
 
+**Cited by.** [2022-08-24 LuckyTiger NFT mint (small and not precisely documen…)](../knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md)
+
 ### SC-RAND-2
 
 **Question.** Can the caller precompute the result in the same tx and revert on a loss?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/randomness.md`](../knowledge-base/vulnerabilities/randomness.md)
 
+**Cited by.** [2022-08-24 LuckyTiger NFT mint (small and not precisely documen…)](../knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md)
+
 ### SC-RAND-3
 
 **Question.** Is a verifiable source (Chainlink VRF) or a sound commit-reveal used instead?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/randomness.md`](../knowledge-base/vulnerabilities/randomness.md)
+
+**Cited by.** [2022-08-24 LuckyTiger NFT mint (small and not precisely documen…)](../knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md)
 
 ### SOL-AM-MA-2
 
@@ -3212,6 +3224,8 @@ Source: Cyfrin / Solodit · upstream path: *Attacker's Mindset › Miner Attack*
 
 **References.**
 - <https://solodit.cyfrin.io/issues/m-01-randomindex-is-not-truly-random-possibility-of-predictably-minting-a-specific-token-id-code4rena-larvalabs-meebits-larvalabs-meebits-contest-git>
+
+**Cited by.** [2022-08-24 LuckyTiger NFT mint (small and not precisely documen…)](../knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md)
 
 ### SOL-Integrations-Chainlink-VRF-1
 
@@ -3331,6 +3345,8 @@ Source: Cyfrin / Solodit · upstream path: *Timelock*
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md)
 
+**Cited by.** [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
+
 ### SC-BRIDGE-2
 
 **Question.** Is a unique nonce / message id consumed to prevent replay?
@@ -3343,11 +3359,15 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridg
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md)
 
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md); [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
+
 ### SC-BRIDGE-4
 
 **Question.** Are bridge init/upgrade paths tightly guarded? (Nomad/Wormhole/Ronin class)
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md)
+
+**Cited by.** [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md)
 
 ### SC-BRIDGE-5
 
@@ -3355,11 +3375,15 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridg
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md) · added from: case study 2021-08-10 Poly Network
 
+**Cited by.** [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
+
 ### SC-BRIDGE-6
 
 **Question.** Is the zero/default value of a trusted-root, confirmation or nonce mapping treated as valid or "confirmed"?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/bridges-cross-chain.md`](../knowledge-base/vulnerabilities/bridges-cross-chain.md) · added from: case study 2022-08-01 Nomad
+
+**Cited by.** [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md)
 
 ### SOL-Integrations-Chainlink-CCIP-1
 
@@ -3642,6 +3666,8 @@ Source: Cyfrin / Solodit · upstream path: *Multi-chain/Cross-chain*
 
 **Remediation.** Double check the access control over cross-chain messaging components.
 
+**Cited by.** [2021-08-10 Poly Network (~$611M)](../knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md)
+
 ### SOL-McCc-9
 
 **Question.** Is there a whitelist of compatible chains?
@@ -3727,7 +3753,7 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/low-l
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/low-level-calls.md`](../knowledge-base/vulnerabilities/low-level-calls.md)
 
-**Cited by.** [2022-01-18 Multichain / Anyswap `AnyswapV4Router.a… (~$1.4M)](../knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md)
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md); [2022-01-18 Multichain / Anyswap `AnyswapV4Router.a… (~$1.4M)](../knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md)
 
 ### SOL-Basics-Payment-6
 
@@ -3861,6 +3887,8 @@ Source: Cyfrin / Solodit · upstream path: *External Call*
 - <https://solodit.xyz/issues/m-25-vault-can-be-created-for-not-yet-existing-erc20-tokens-which-allows-attackers-to-set-traps-to-steal-nfts-from-borrowers-code4rena-astaria-astaria-git>
 - <https://solodit.xyz/issues/calls-made-to-non-existentremoved-routes-or-controllers-will-not-result-in-failure-consensys-socket-markdown>
 
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md)
+
 ### SOL-Heuristics-5
 
 **Question.** Does the `try/catch` block account for potential gas shortages?
@@ -3915,6 +3943,8 @@ Source: Cyfrin / Solodit · upstream path: *Low Level*
 **References.**
 - <https://github.com/AmadiMichael/LowLevelVulnerabilities?tab=readme-ov-file#ensure-that-addresses-being-called-static-called-or-delegate-called-have-code-deployed-to-them>
 
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md)
+
 ### SOL-LL-4
 
 **Question.** Is there a check on the return data size when calling precompiled code?
@@ -3935,6 +3965,8 @@ Source: Cyfrin / Solodit · upstream path: *Low Level*
 **Question.** Zero-address checks on setters and transfers?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md)
+
+**Cited by.** [2022-01-27 Qubit Finance QBridge (~$80M)](../knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md)
 
 ### SC-INPUT-2
 
@@ -3960,17 +3992,23 @@ SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/input
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md) · added from: case study 2023-04-09 SushiSwap RouteProcessor2
 
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
+
 ### SC-INPUT-6
 
 **Question.** Can user-supplied addresses or calldata make the contract perform an arbitrary external call (router, target, token), including `transferFrom` against other users' approvals?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md) · added from: Dexible, Transit Swap, Socket
 
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
+
 ### SC-INPUT-7
 
 **Question.** Does any mapping lookup treat the zero/default value (`bytes32(0)`, `address(0)`, `0`) as valid or "confirmed"?
 
 SmartCon core question · knowledge base: [`knowledge-base/vulnerabilities/input-validation.md`](../knowledge-base/vulnerabilities/input-validation.md) · added from: case study 2022-08-01 Nomad
+
+**Cited by.** [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md)
 
 ### SOL-Basics-AL-5
 
@@ -4087,6 +4125,8 @@ Source: Cyfrin / Solodit · upstream path: *Defi › AMM/Swap*
 
 **Remediation.** Validate and sanitize user inputs. Avoid executing arbitrary calls based solely on input data.
 
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
+
 ### SOL-Defi-AS-12
 
 **Question.** Does the integrating contract verify the caller address in its callback functions?
@@ -4096,6 +4136,8 @@ Source: Cyfrin / Solodit · upstream path: *Defi › AMM/Swap*
 **Description.** Callback functions can be manipulated if they don't validate the calling contract's address. This is especially crucial for functions like `swap()` that involve tokens or assets.
 
 **Remediation.** Implement checks in the callback functions to validate the address of the calling contract. Additionally, review the logic for any potential bypasses to this check.
+
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
 
 ### SOL-EC-2
 
@@ -4123,6 +4165,8 @@ Source: Cyfrin / Solodit · upstream path: *External Call*
 **References.**
 - <https://solodit.xyz/issues/too-generic-calls-in-genericbridgefacet-allow-stealing-of-tokens-spearbit-lifi-pdf>
 - <https://solodit.xyz/issues/hardcode-or-whitelist-the-axelar-destinationaddress-spearbit-lifi-pdf>
+
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
 
 ### SOL-Heuristics-3
 
@@ -4154,6 +4198,8 @@ Source: Cyfrin / Solodit · upstream path: *Heuristics*
 
 **Remediation.** Avoid solely relying on default values to determine initialization status.
 
+**Cited by.** [2022-08-01 Nomad token bridge (~$190M)](../knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md)
+
 ### SOL-Integrations-Uniswap-4
 
 **Question.** Are the pools that are being interacted with whitelisted?
@@ -4173,6 +4219,8 @@ Source: Cyfrin / Solodit · upstream path: *Integrations › Uniswap*
 **Description.** Directly using `pool.swap()` can bypass certain security mechanisms.
 
 **Remediation.** Always use the Router contract to handle swaps, providing an added layer of security and standardization.
+
+**Cited by.** [2023-04-09 SushiSwap `RouteProcessor2` router (>$3.3M)](../knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md)
 
 ## Appendix A. Version-specific issues (compiler and library bugs)
 

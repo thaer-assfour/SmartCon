@@ -213,7 +213,9 @@
           "id": "SC-AC-1",
           "question": "Is every state-changing/privileged function gated by the correct modifier?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+          ]
         },
         {
           "id": "SC-AC-2",
@@ -568,8 +570,10 @@
         }
       ],
       "case_studies": [
+        "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md",
         "knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md",
-        "knowledge-base/case-studies/2021-09-03-dao-maker-unprotected-init.md"
+        "knowledge-base/case-studies/2021-09-03-dao-maker-unprotected-init.md",
+        "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
       ]
     },
     {
@@ -2469,7 +2473,9 @@
           "remediation": "Implement checks to handle zero hash values appropriately and prevent potential misuse.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md"
+          ]
         },
         {
           "id": "SOL-HMT-4",
@@ -3234,7 +3240,9 @@
           "remediation": "Use OpenZeppelin's SafeERC20 where the safeTransfer and safeTransferFrom functions handle the return value check as well as non-standard-compliant tokens.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md"
+          ]
         },
         {
           "id": "SOL-Token-FE-2",
@@ -4194,19 +4202,25 @@
           "id": "SC-RAND-1",
           "question": "Is `block.timestamp` / `blockhash` / `prevrandao` used as randomness for a value-bearing outcome? (predictable + validator-influenced)",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md"
+          ]
         },
         {
           "id": "SC-RAND-2",
           "question": "Can the caller precompute the result in the same tx and revert on a loss?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md"
+          ]
         },
         {
           "id": "SC-RAND-3",
           "question": "Is a verifiable source (Chainlink VRF) or a sound commit-reveal used instead?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md"
+          ]
         },
         {
           "id": "SOL-AM-MA-2",
@@ -4222,7 +4236,9 @@
             "https://solodit.cyfrin.io/issues/m-01-randomindex-is-not-truly-random-possibility-of-predictably-minting-a-specific-token-id-code4rena-larvalabs-meebits-larvalabs-meebits-contest-git"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md"
+          ]
         },
         {
           "id": "SOL-Integrations-Chainlink-VRF-1",
@@ -4287,7 +4303,9 @@
           "cited_by": []
         }
       ],
-      "case_studies": []
+      "case_studies": [
+        "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md"
+      ]
     },
     {
       "number": 14,
@@ -4385,7 +4403,9 @@
           "id": "SC-BRIDGE-1",
           "question": "Is the cross-chain message verified against the correct validator set/threshold?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+          ]
         },
         {
           "id": "SC-BRIDGE-2",
@@ -4397,27 +4417,36 @@
           "id": "SC-BRIDGE-3",
           "question": "Is the message bound to source chain, destination, and exact payload?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md",
+            "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+          ]
         },
         {
           "id": "SC-BRIDGE-4",
           "question": "Are bridge init/upgrade paths tightly guarded? (Nomad/Wormhole/Ronin class)",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md"
+          ]
         },
         {
           "id": "SC-BRIDGE-5",
           "question": "Can a cross-chain message target a privileged contract of the bridge itself (config, keeper or validator-set contract) and pass its `onlyOwner` check because the executor is the owner?",
           "added_from": "case study 2021-08-10 Poly Network",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+          ]
         },
         {
           "id": "SC-BRIDGE-6",
           "question": "Is the zero/default value of a trusted-root, confirmation or nonce mapping treated as valid or \"confirmed\"?",
           "added_from": "case study 2022-08-01 Nomad",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md"
+          ]
         },
         {
           "id": "SOL-Integrations-Chainlink-CCIP-1",
@@ -4781,7 +4810,9 @@
           "remediation": "Double check the access control over cross-chain messaging components.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+          ]
         },
         {
           "id": "SOL-McCc-9",
@@ -4855,7 +4886,11 @@
           "cited_by": []
         }
       ],
-      "case_studies": []
+      "case_studies": [
+        "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md",
+        "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md",
+        "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md"
+      ]
     },
     {
       "number": 16,
@@ -4887,6 +4922,7 @@
           "question": "Is a `call` to a possibly-codeless address treated as success? (phantom function)",
           "source": "smartcon",
           "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md",
             "knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md"
           ]
         },
@@ -5044,7 +5080,9 @@
             "https://solodit.xyz/issues/calls-made-to-non-existentremoved-routes-or-controllers-will-not-result-in-failure-consensys-socket-markdown"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md"
+          ]
         },
         {
           "id": "SOL-Heuristics-5",
@@ -5106,7 +5144,9 @@
             "https://github.com/AmadiMichael/LowLevelVulnerabilities?tab=readme-ov-file#ensure-that-addresses-being-called-static-called-or-delegate-called-have-code-deployed-to-them"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md"
+          ]
         },
         {
           "id": "SOL-LL-4",
@@ -5125,6 +5165,7 @@
         }
       ],
       "case_studies": [
+        "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md",
         "knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md"
       ]
     },
@@ -5139,7 +5180,9 @@
           "id": "SC-INPUT-1",
           "question": "Zero-address checks on setters and transfers?",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md"
+          ]
         },
         {
           "id": "SC-INPUT-2",
@@ -5164,21 +5207,27 @@
           "question": "Do callbacks (flash-loan, Uniswap `swap`/`mint`, ERC-721 receiver) verify `msg.sender` is the expected pool/lender and that the initiator is this contract?",
           "added_from": "case study 2023-04-09 SushiSwap RouteProcessor2",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         },
         {
           "id": "SC-INPUT-6",
           "question": "Can user-supplied addresses or calldata make the contract perform an arbitrary external call (router, target, token), including `transferFrom` against other users' approvals?",
           "added_from": "Dexible, Transit Swap, Socket",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         },
         {
           "id": "SC-INPUT-7",
           "question": "Does any mapping lookup treat the zero/default value (`bytes32(0)`, `address(0)`, `0`) as valid or \"confirmed\"?",
           "added_from": "case study 2022-08-01 Nomad",
           "source": "smartcon",
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md"
+          ]
         },
         {
           "id": "SOL-Basics-AL-5",
@@ -5329,7 +5378,9 @@
           "remediation": "Validate and sanitize user inputs. Avoid executing arbitrary calls based solely on input data.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         },
         {
           "id": "SOL-Defi-AS-12",
@@ -5343,7 +5394,9 @@
           "remediation": "Implement checks in the callback functions to validate the address of the calling contract. Additionally, review the logic for any potential bypasses to this check.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         },
         {
           "id": "SOL-EC-2",
@@ -5374,7 +5427,9 @@
             "https://solodit.xyz/issues/hardcode-or-whitelist-the-axelar-destinationaddress-spearbit-lifi-pdf"
           ],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         },
         {
           "id": "SOL-Heuristics-3",
@@ -5413,7 +5468,9 @@
           "remediation": "Avoid solely relying on default values to determine initialization status.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md"
+          ]
         },
         {
           "id": "SOL-Integrations-Uniswap-4",
@@ -5441,10 +5498,16 @@
           "remediation": "Always use the Router contract to handle swaps, providing an added layer of security and standardization.",
           "references": [],
           "tags": [],
-          "cited_by": []
+          "cited_by": [
+            "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md"
+          ]
         }
       ],
-      "case_studies": []
+      "case_studies": [
+        "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md",
+        "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md",
+        "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md"
+      ]
     }
   ],
   "appendices": [
@@ -6566,6 +6629,28 @@
       "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/HundredFinance_2_exp.sol"
     },
     {
+      "file": "knowledge-base/case-studies/2023-04-09-sushiswap-routeprocessor2-unverified-callback.md",
+      "title": "SushiSwap RouteProcessor2 — Unverified Swap Callback Drains Approvals",
+      "date": "2023-04-09",
+      "protocol": "SushiSwap `RouteProcessor2` router",
+      "chain": "Ethereum (and other chains where RouteProcessor2 was deployed)",
+      "loss": ">$3.3M (largest single victim 0xSifu; the majority was recovered by whitehats)",
+      "categories": [
+        "input-validation",
+        "access-control"
+      ],
+      "items": [
+        "SC-INPUT-5",
+        "SC-INPUT-6",
+        "SOL-Defi-AS-12",
+        "SOL-Integrations-Uniswap-6",
+        "SOL-Defi-AS-6",
+        "SOL-EC-5"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0x04b166e7b4ab5105a8e9c85f08f6346de1c66368687215b0e0b58d6e5002bc32",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-04/Sushi_Router_exp.sol"
+    },
+    {
       "file": "knowledge-base/case-studies/2023-03-13-euler-finance-donate-to-reserves.md",
       "title": "Euler Finance — donateToReserves Skipped the Health Check",
       "date": "2023-03-13",
@@ -6623,6 +6708,46 @@
       ],
       "attack_tx": "https://arbiscan.io/tx/0x5db5c2400ab56db697b3cc9aa02a05deab658e1438ce2f8692ca009cc45171dd",
       "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2023-02/dForce_exp.sol"
+    },
+    {
+      "file": "knowledge-base/case-studies/2022-08-24-luckytiger-nft-predictable-randomness.md",
+      "title": "LuckyTiger NFT — Predictable On-Chain \"Randomness\"",
+      "date": "2022-08-24",
+      "protocol": "LuckyTiger NFT mint",
+      "chain": "Ethereum",
+      "loss": "small and not precisely documented; impact is that the attacker mints only the winning/rare outcomes at will, defeating the mint's fairness (see note)",
+      "categories": [
+        "randomness"
+      ],
+      "items": [
+        "SC-RAND-1",
+        "SC-RAND-2",
+        "SC-RAND-3",
+        "SOL-AM-MA-2"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0x804ff3801542bff435a5d733f4d8a93a535d73d0de0f843fd979756a7eab26af",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/LuckyTiger_exp.sol"
+    },
+    {
+      "file": "knowledge-base/case-studies/2022-08-01-nomad-bridge-zero-root-accepted.md",
+      "title": "Nomad Bridge — A Zero Root Made Every Message \"Proven\"",
+      "date": "2022-08-01",
+      "protocol": "Nomad token bridge (`Replica` optimistic-verification contract)",
+      "chain": "Ethereum",
+      "loss": "~$190M (DeFiHackLabs records ~$152M)",
+      "categories": [
+        "bridges-cross-chain",
+        "input-validation"
+      ],
+      "items": [
+        "SC-BRIDGE-6",
+        "SC-INPUT-7",
+        "SC-BRIDGE-4",
+        "SOL-HMT-3",
+        "SOL-Heuristics-11"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0xa5fe9d044e4f3e5aa5bc4c0709333cd2190cba0f4e7f16bcf73f49f83e4a5460",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-08/NomadBridge_exp.sol"
     },
     {
       "file": "knowledge-base/case-studies/2022-07-23-audius-storage-collision-governance.md",
@@ -6751,6 +6876,29 @@
       "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-03/HundredFinance_exp.sol"
     },
     {
+      "file": "knowledge-base/case-studies/2022-01-27-qubit-finance-codeless-address-call.md",
+      "title": "Qubit Finance QBridge — `safeTransferFrom` on `address(0)` Mints Free Collateral",
+      "date": "2022-01-27",
+      "protocol": "Qubit Finance QBridge (Ethereum -> BSC deposit bridge)",
+      "chain": "Ethereum (deposit) / BSC (mint)",
+      "loss": "~$80M",
+      "categories": [
+        "low-level-calls",
+        "bridges-cross-chain",
+        "input-validation"
+      ],
+      "items": [
+        "SC-LL-4",
+        "SC-INPUT-1",
+        "SC-BRIDGE-3",
+        "SOL-LL-3",
+        "SOL-EC-12",
+        "SOL-Token-FE-1"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0xac7292e7d0ec8ebe1c94203d190874b2aab30592327b6cc875d00f18de6f3133 (BSC mint https://bscscan.com/tx/0x50946e3e4ccb7d39f3512b7ecb75df66e6868b9af0eee8a7e4b61ef8a459518e)",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2022-01/Qubit_exp.sol"
+    },
+    {
       "file": "knowledge-base/case-studies/2022-01-18-multichain-anyswap-phantom-permit.md",
       "title": "Multichain (Anyswap) — Phantom `permit` on WETH",
       "date": "2022-01-18",
@@ -6812,6 +6960,27 @@
       ],
       "attack_tx": "https://etherscan.io/tx/0x96bf6bd14a81cf19939c0b966389daed778c3a9528a6c5dd7a4d980dec966388",
       "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-09/DaoMaker_exp.sol"
+    },
+    {
+      "file": "knowledge-base/case-studies/2021-08-10-poly-network-cross-chain-keeper-swap.md",
+      "title": "Poly Network — Cross-Chain Message Rewrites the Bridge's Own Keepers",
+      "date": "2021-08-10",
+      "protocol": "Poly Network (cross-chain interoperability bridge)",
+      "chain": "Ethereum, BSC, Polygon",
+      "loss": "~$611M (almost entirely returned within ~2 weeks)",
+      "categories": [
+        "bridges-cross-chain",
+        "access-control"
+      ],
+      "items": [
+        "SC-BRIDGE-5",
+        "SC-BRIDGE-1",
+        "SC-BRIDGE-3",
+        "SC-AC-1",
+        "SOL-McCc-8"
+      ],
+      "attack_tx": "https://etherscan.io/tx/0xb1f70464bd95b774c6ce60fc706eb5f9e35cb5f06e6cfe7c17dcda46ffd59581",
+      "reproduction": "https://github.com/SunWeb3Sec/DeFiHackLabs/blob/main/src/test/2021-08/PolyNetwork_exp.sol"
     },
     {
       "file": "knowledge-base/case-studies/2021-05-19-pancakebunny-flash-loan-lp-pricing.md",
